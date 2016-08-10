@@ -33,6 +33,7 @@ export default class Menubar extends React.Component {
 
     componentWillUnmount () {
         window.removeEventListener('scroll', this.handleSpy.bind(this));
+        window.removeEventListener('resize', this.handleResize.bind(this));
     }
     componentWillUpdate(nextProps, nextState) {
     }
@@ -194,7 +195,7 @@ export default class Menubar extends React.Component {
                         <a><img style={styles.logoBase} src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"} /></a>
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Nav pullRight onClick={ ()=> this.setState({ open: !this.state.open })}>
+                <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: !this.state.open})}>
                     <NavItem onMouseOver={ ()=> this.setState({ overButton: true})} onMouseOut={ ()=> this.setState({ overButton: false})}  eventKey={1} ><div style={styles.menuButton}>menu </div><div style={styles.littleTweak}><hr style={[styles.lTb, lTbn1]} /><hr style={[styles.lTb, lTbn2]}/><hr style={[styles.lTb, lTbn1]} /></div></NavItem>
                 </Nav>
             </Navbar>

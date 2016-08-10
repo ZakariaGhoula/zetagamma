@@ -62,21 +62,20 @@ class Home extends React.Component {
             scrollDownBtn: {
                 position: 'relative',
                 bottom: '10vw',
-                width: '100%',
-                display: 'inline-block',
                 textAlign: 'center',
+                color: '#fff',
                 border: "none",
                 outline: "0",
                 background: "0 0",
-            },
-            scrollDownIcon: {
                 opacity: '.6',
-                transition: 'opacity .3s',
-                cursor: 'pointer',
-                width: '35px',
+                transition: 'all .3s',
                 ':hover': {
                     opacity: '1',
                 }
+            },
+            scrollDownIcon: {
+                width: '35px',
+                marginBottom: '20px'
             }
         }
 
@@ -90,7 +89,7 @@ class Home extends React.Component {
                             La solution digitale au profit de la<br />performance
                         </div>
                         <Video autoPlay muted style={styles.video}
-                               poster={PUBLIC_IMAGES_PATH + "Landing_ZG_01.png"}
+                               poster={PUBLIC_IMAGES_PATH + "Landing_debut.png"}
                                onCanPlayThrough={() => {
                                    // Do stuff
                                }}>
@@ -98,8 +97,11 @@ class Home extends React.Component {
                         </Video>
 
                         <div style={styles.scrollDownBtn}>
-                            <Link to="scroll1" smooth={true} offset={-50} duration={1000}>
-                            <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/down-arrow.svg"}/>
+                            <Link
+                                style={{color: '#fff', cursor: 'pointer', textDecoration: 'none', fontStyle: 'italic'}}
+                                to="scroll1" smooth={true} offset={-50} duration={1000}>
+                                <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/mouse.svg"}/><br />
+                                Scroll down
                             </Link>
                         </div>
                     </Col>
@@ -108,29 +110,30 @@ class Home extends React.Component {
                 <Grid className="home" ref="home">
                     <Element name="scroll1">
 
-                    <h2 style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontSize: '28px',
-                        display: 'block',
-                        color: '#4a4a4a',
-                        textAlign: 'center',
-                        margin: '40px auto',
-                        letterSpacing: '1px'
-                    }}>
-                        Zetagamma est une agence digitale </h2>
-                    <h3 style={{
-                        fontFamily: "'Alegreya Sans', sans-serif",
-                        fontSize: '24px',
-                        lineHeight: '30px',
-                        color: '#4a4a4a',
-                        display: 'block',
-                        textAlign: 'center',
-                        margin: '40px auto',
-                        fontWeight: 300
-                    }}>
-                        Nous proposons des réponses concrètes pour répondre aux besoins de nos clients.
-                        Grâce à un large éventail de services, nous accompagnons le client tout au long de l’élaboration
-                        de sa solution digitale.</h3>
+                        <h2 style={{
+                            fontFamily: "'Playfair Display', serif",
+                            fontSize: '28px',
+                            display: 'block',
+                            color: '#4a4a4a',
+                            textAlign: 'center',
+                            margin: '40px auto',
+                            letterSpacing: '1px'
+                        }}>
+                            Zetagamma est une agence digitale </h2>
+                        <h3 style={{
+                            fontFamily: "'Alegreya Sans', sans-serif",
+                            fontSize: '24px',
+                            lineHeight: '30px',
+                            color: '#4a4a4a',
+                            display: 'block',
+                            textAlign: 'center',
+                            margin: '40px auto',
+                            fontWeight: 300
+                        }}>
+                            Nous proposons des réponses concrètes pour répondre aux besoins de nos clients.
+                            Grâce à un large éventail de services, nous accompagnons le client tout au long de
+                            l’élaboration
+                            de sa solution digitale.</h3>
                     </Element>
                 </Grid>
                 <UnderGrid>
@@ -173,7 +176,7 @@ class Home extends React.Component {
                         </Col>
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
-                            {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
+                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
                                 <h1 style={{
                                     fontFamily: "'Playfair Display', serif",
@@ -183,11 +186,12 @@ class Home extends React.Component {
                                     margin: '13px auto 40px'
                                 }}>Développement et maintenance</h1>
 
-                            <p style={{textAlign:'justify',fontSize:'16px',lineHeight:'26px'}}>
-                                Nous développons des applications web et mobiles grâces aux dernières technologies. Nous
-                                assurons la maintenance de l’application et proposons des formations à nos clients
-                                adaptées à leurs besoins d’autonomie.</p>
-                        </div>
+                                <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
+                                    Nous développons des applications web et mobiles grâces aux dernières technologies.
+                                    Nous
+                                    assurons la maintenance de l’application et proposons des formations à nos clients
+                                    adaptées à leurs besoins d’autonomie.</p>
+                            </div>
                         </Col> <Col lg={6} md={6} xs={12}>
                         <div style={styles.simpleColDiv}>
                             {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
