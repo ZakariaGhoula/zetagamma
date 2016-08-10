@@ -48,7 +48,8 @@ app.use((req, res) => {
         <title>Zetagamma</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:400,200,300,600,500,700,800" media="screen" type="text/css">
+ <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,300,500' rel='stylesheet' type='text/css' />
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700italic,400italic' rel='stylesheet' type='text/css' />
         <script type="application/javascript">
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>

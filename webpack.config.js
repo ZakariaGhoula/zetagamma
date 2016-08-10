@@ -13,9 +13,9 @@ module.exports = {
     },
     resolve: {
         modulesDirectories: ['node_modules', 'shared'],
-        extensions: ["", ".tsx", ".ts", ".jsx", ".js"]
+        extensions: ['', '.js', '.jsx']
     },
-    publicPath:  path.join(__dirname, 'dist'),
+    publicPath: path.join(__dirname, '/dist/'),
 
     headers: { 'Access-Control-Allow-Origin': '*' },
     module: {

@@ -61,9 +61,7 @@ export default class Header extends React.Component {
         return (
 
             <header >
-                <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,300,500' rel='stylesheet' type='text/css' />
-                <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700italic,400italic' rel='stylesheet' type='text/css' />
-              <Menubar />
+                <Menubar />
             </header>
 
 
