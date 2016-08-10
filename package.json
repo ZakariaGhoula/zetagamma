@@ -81,6 +81,7 @@
     "react-redux-loading-bar": "^2.1.0",
     "react-router": "^1.0.3",
     "react-router-component": "^0.29.0",
+    "react-scroll": "^1.2.0",
     "redux": "^3.0.0",
     "redux-convention": "^1.0.1",
     "redux-history-transitions": "^1.0.0",

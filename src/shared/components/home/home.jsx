@@ -8,7 +8,8 @@ import * as HomeActions    from './../../actions/HomeActions';
 import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
 import { Button } from 'react-bootstrap';
 import Video from 'react-html5video';
-import Radium, { Style } from 'radium'
+import Radium, {Style} from 'radium';
+import {Link, Element} from 'react-scroll';
 import UnderGrid from './underGrid';
 
 @Radium
@@ -66,12 +67,12 @@ class Home extends React.Component {
                 textAlign: 'center',
                 border: "none",
                 outline: "0",
-                cursor: 'pointer',
                 background: "0 0",
             },
             scrollDownIcon: {
                 opacity: '.6',
-                transition: 'opacity .2s',
+                transition: 'opacity .3s',
+                cursor: 'pointer',
                 width: '35px',
                 ':hover': {
                     opacity: '1',
@@ -95,13 +96,18 @@ class Home extends React.Component {
                                }}>
                             <source src={PUBLIC_VIDEOS_PATH + "landing_zg4.mp4"} type="video/mp4"/>
                         </Video>
+
                         <div style={styles.scrollDownBtn}>
+                            <Link to="scroll1" smooth={true} offset={-50} duration={1000}>
                             <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/down-arrow.svg"}/>
+                            </Link>
                         </div>
                     </Col>
                 </Row>
 
                 <Grid className="home" ref="home">
+                    <Element name="scroll1">
+
                     <h2 style={{
                         fontFamily: "'Playfair Display', serif",
                         fontSize: '28px',
@@ -125,6 +131,7 @@ class Home extends React.Component {
                         Nous proposons des réponses concrètes pour répondre aux besoins de nos clients.
                         Grâce à un large éventail de services, nous accompagnons le client tout au long de l’élaboration
                         de sa solution digitale.</h3>
+                    </Element>
                 </Grid>
                 <UnderGrid>
                     <Row>
