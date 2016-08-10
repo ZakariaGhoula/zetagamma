@@ -22,7 +22,7 @@ export default function configureStore(initialState) {
             menubar,
             loadingBar: loadingBarReducer,
             browser: createResponsiveStateReducer({
-                extraSmall: 500,
+                extraSmall: 450,
                 small: 700,
                 medium: 1000,
                 large: 1280,

@@ -17,29 +17,37 @@ export default class Menubar extends React.Component {
             isShown: true,
             open: false,
             isTop: true,
-            overButton: false
+            overButton: false,
+            videoHeight: 0
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.handleSpy = this.handleSpy.bind(this);
+        this.handleResize = this.handleResize.bind(this);
     }
     componentDidMount () {
-        window.addEventListener('scroll', this.handleSpy.bind(this))
+        window.addEventListener('scroll', this.handleSpy.bind(this));
+        window.addEventListener('resize', this.handleResize.bind(this));
+        var VideoHeight = document.getElementById('video-row').offsetHeight;
+        this.setState({videoHeight: VideoHeight});
     }
 
     componentWillUnmount () {
-        window.removeEventListener('scroll', this.handleSpy.bind(this))
+        window.removeEventListener('scroll', this.handleSpy.bind(this));
     }
     componentWillUpdate(nextProps, nextState) {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (  this.props.menubar.is_shown != nextProps.menubar.is_shown || this.state.open !== nextState.open|| this.state.isTop !== nextState.isTop|| this.state.overButton !== nextState.overButton)
+        return (  this.props.menubar.is_shown != nextProps.menubar.is_shown || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight)
     }
 
     changeDisplay(boolean) {
         this.props.actions_menubar.changeDisplayMenubar(boolean);
     }
 
+    handleResize() {
+        this.setState({videoHeight: document.getElementById('video-row').offsetHeight});
+    }
     handleSpy() {
         if(window.scrollY < 30) {
             if(this.state.isTop == false)
@@ -48,7 +56,7 @@ export default class Menubar extends React.Component {
             if(this.state.isTop == true)
                 this.setState({isTop: false});
         }
-        if(window.scrollY > 500){
+        if (window.scrollY > (this.state.videoHeight) - 80) {
             if(window.scrollY - this.state.lastY > 0){
                 if(this.state.isShown == true){
                     this.props.actions_menubar.changeDisplayMenubar(false);

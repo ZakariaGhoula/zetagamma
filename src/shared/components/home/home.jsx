@@ -82,7 +82,7 @@ class Home extends React.Component {
 
         return (
             <Grid style={styles.mainGrid} className="home" fluid ref="home">
-                <Row className="show-grid">
+                <Row className="show-grid" id="video-row">
                     <Col>
                         <div style={styles.baseline}>
                             <img style={styles.centerLogoStyle} src={PUBLIC_IMAGES_PATH + "logo_ZG.png"}/>
@@ -138,7 +138,7 @@ class Home extends React.Component {
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '120px', border: '1px solid #021016'}}/>
+                                <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
                                 <h1 style={{
                                     fontFamily: "'Playfair Display', serif",
                                     fontSize: '26px',
@@ -156,7 +156,7 @@ class Home extends React.Component {
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '120px', border: '1px solid #021016'}}/>
+                                <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
                                 <h1 style={{
                                     fontFamily: "'Playfair Display', serif",
                                     fontSize: '26px',
@@ -174,7 +174,7 @@ class Home extends React.Component {
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                             {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '150px', border: '1px solid #021016'}}/>
+                                <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
                                 <h1 style={{
                                     fontFamily: "'Playfair Display', serif",
                                     fontSize: '26px',
@@ -191,7 +191,7 @@ class Home extends React.Component {
                         </Col> <Col lg={6} md={6} xs={12}>
                         <div style={styles.simpleColDiv}>
                             {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                            <hr style={{width: '150px', border: '1px solid #021016'}}/>
+                            <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
                             <h1 style={{
                                 fontFamily: "'Playfair Display', serif",
                                 fontSize: '26px',
