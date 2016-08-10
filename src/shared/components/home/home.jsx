@@ -57,33 +57,25 @@ class Home extends React.Component {
                 color: '#4a4a4a',
                 textAlign: 'center',
                 fontFamily: "'Alegreya Sans', sans-serif",
-            }
-            , scrollDownBtn: {
-                position: 'absolute',
-                bottom: '50px',
-                left: '50%',
-                display: 'block',
-                transform: 'translateX(-50%)',
-                opacity: '.5',
-                transition: 'opacity .2s',
+            },
+            scrollDownBtn: {
+                position: 'relative',
+                bottom: '10vw',
+                width: '100%',
+                display: 'inline-block',
+                textAlign: 'center',
                 border: "none",
                 outline: "0",
+                cursor: 'pointer',
                 background: "0 0",
+            },
+            scrollDownIcon: {
+                opacity: '.6',
+                transition: 'opacity .2s',
+                width: '35px',
                 ':hover': {
-                    opacity: '1'
+                    opacity: '1',
                 }
-            }
-        }
-        let message = "";
-        if (typeof this.props.browser !== "undefined") {
-            message += `The viewport's current media type is: ${this.props.browser.mediaType}.`
-            ;
-            if (this.props.browser.lessThan.small) {
-                message += 'Secret message for viewports smaller than than the "small" breakpoint!'
-            } else if (this.props.browser.lessThan.medium) {
-                message += 'Secret message for viewports between the "small" and "medium" breakpoints!'
-            } else {
-                message += 'Message for viewports greater than the "medium" breakpoint.'
             }
         }
 
@@ -91,10 +83,10 @@ class Home extends React.Component {
             <Grid style={styles.mainGrid} className="home" fluid ref="home">
                 <Row className="show-grid">
                     <Col>
-
-                        <div style={styles.baseline}><img style={styles.centerLogoStyle}
-                                                          src={PUBLIC_IMAGES_PATH + "logo_ZG.png"}/><br />La solution
-                            digitale au profit de la<br />performance
+                        <div style={styles.baseline}>
+                            <img style={styles.centerLogoStyle} src={PUBLIC_IMAGES_PATH + "logo_ZG.png"}/>
+                            <br />
+                            La solution digitale au profit de la<br />performance
                         </div>
                         <Video autoPlay muted style={styles.video}
                                poster={PUBLIC_IMAGES_PATH + "Landing_ZG_01.png"}
@@ -103,30 +95,33 @@ class Home extends React.Component {
                                }}>
                             <source src={PUBLIC_VIDEOS_PATH + "landing_zg4.mp4"} type="video/mp4"/>
                         </Video>
-                        <Button style={styles.scrollDownBtn} className="scroll-down-btn">
-
-                            <img src={PUBLIC_IMAGES_PATH + "svg/mouse.svg"}
-                                 style={{width:"35px",opacity:'1',      fill: '#fff',  transform: 'matrix(1, 0, 0, 1, 0, 0)'   }}/>
-
-
-                            <div className="scroll-down-btn-label blast-root"
-                                 aria-label="scroll down" style={{    paddingTop: '18px',
-    color: '#4a4a4a',
-    linehHeight: '14px',
-    fontSize: '14px'}}>
-                                <span className="blast scroll-down-btn-label-word" aria-hidden="true"
-                                      style={{opacity:'1'}}>scroll</span> <span
-                                className="blast scroll-down-btn-label-word" aria-hidden="true"
-                                className={{opacity: '1'}}>down</span>
-                            </div>
-                        </Button>
+                        <div style={styles.scrollDownBtn}>
+                            <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/down-arrow.svg"}/>
+                        </div>
                     </Col>
                 </Row>
 
                 <Grid className="home" ref="home">
-                    <h2 style={{fontFamily:"'Playfair Display', serif", fontSize:'1.6vw', display:'block',      color: '#4a4a4a',textAlign:'center', margin:'40px auto',letterSpacing:'1px'}}>
+                    <h2 style={{
+                        fontFamily: "'Playfair Display', serif",
+                        fontSize: '28px',
+                        display: 'block',
+                        color: '#4a4a4a',
+                        textAlign: 'center',
+                        margin: '40px auto',
+                        letterSpacing: '1px'
+                    }}>
                         Zetagamma est une agence digitale </h2>
-                    <h3 style={{fontFamily:"'Alegreya Sans', sans-serif", fontSize:'1.3vw',lineHeight:'2vw',     color: '#4a4a4a', display:'block', textAlign:'center', margin:'40px auto',fontWeight:300}}>
+                    <h3 style={{
+                        fontFamily: "'Alegreya Sans', sans-serif",
+                        fontSize: '24px',
+                        lineHeight: '30px',
+                        color: '#4a4a4a',
+                        display: 'block',
+                        textAlign: 'center',
+                        margin: '40px auto',
+                        fontWeight: 300
+                    }}>
                         Nous proposons des réponses concrètes pour répondre aux besoins de nos clients.
                         Grâce à un large éventail de services, nous accompagnons le client tout au long de l’élaboration
                         de sa solution digitale.</h3>
@@ -137,67 +132,71 @@ class Home extends React.Component {
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={{width: '120px', border: '1px solid #021016'}}/>
-                                <h1 style={{fontFamily:"'Playfair Display', serif", fontSize:'26px', display:'inline-block',      color: '#4a4a4a',textAlign:'center', margin:'13px auto 40px'}}>
-                                    Gestion de projet</h1>
-
-                                <p style={{textAlign:'justify',fontSize:'16px',lineHeight:'26px'}}>
+                                <h1 style={{
+                                    fontFamily: "'Playfair Display', serif",
+                                    fontSize: '26px',
+                                    display: 'inline-block',
+                                    textAlign: 'center',
+                                    margin: '13px auto 40px'
+                                }}>Gestion de projet</h1>
+                                <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
                                     Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
-                                    ou d’un concept
-                                    innovant proposé par nos clients. Nous offrons à la fois conseils, gestion et
-                                    développement pour
-                                    répondre aux exigences du client. Nous garantissons un suivi du projet durant les
-                                    différentes étapes
-                                    pour un résultat respectant l'équilibre qualité-coût-délai.</p>
+                                    ou d’un concept innovant proposé par nos clients. Nous garantissons un suivi du
+                                    projet durant les différentes étapes pour un résultat respectant l’équilibre
+                                    qualité-coût- délai.</p>
                             </div>
                         </Col>
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={{width: '120px', border: '1px solid #021016'}}/>
-                                <h1 style={{fontFamily:"'Playfair Display', serif", fontSize:'26px', display:'inline-block',      color: '#4a4a4a',textAlign:'center', margin:'13px auto 40px'}}>
-                                    Gestion de projet</h1>
+                                <h1 style={{
+                                    fontFamily: "'Playfair Display', serif",
+                                    fontSize: '26px',
+                                    display: 'inline-block',
+                                    textAlign: 'center',
+                                    margin: '13px auto 40px'
+                                }}>Stratégie digitale et marketing</h1>
 
-                                <p style={{textAlign:'justify',fontSize:'16px',lineHeight:'26px'}}>
-                                    Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
-                                    ou d’un concept
-                                    innovant proposé par nos clients. Nous offrons à la fois conseils, gestion et
-                                    développement pour
-                                    répondre aux exigences du client. Nous garantissons un suivi du projet durant les
-                                    différentes étapes
-                                    pour un résultat respectant l'équilibre qualité-coût-délai.</p>
+                                <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
+                                    Nous aidons les entreprises à mieux gérer leur activité actuelle afin de la mettre à
+                                    profit. Notre objectif est d’intensifier la force du service ou du produit et
+                                    d’accroître la notoriété de l’entreprise.</p>
                             </div>
                         </Col>
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
-                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
+                            {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={{width: '150px', border: '1px solid #021016'}}/>
-                                <h1 style={{fontFamily:"'Playfair Display', serif", fontSize:'26px', display:'inline-block',      color: '#4a4a4a',textAlign:'center', margin:'13px auto 40px'}}>
-                                    Gestion de projet</h1>
+                                <h1 style={{
+                                    fontFamily: "'Playfair Display', serif",
+                                    fontSize: '26px',
+                                    display: 'inline-block',
+                                    textAlign: 'center',
+                                    margin: '13px auto 40px'
+                                }}>Développement et maintenance</h1>
 
-                                <p style={{textAlign:'justify',fontSize:'16px',lineHeight:'26px'}}>
-                                    Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
-                                    ou d’un concept
-                                    innovant proposé par nos clients. Nous offrons à la fois conseils, gestion et
-                                    développement pour
-                                    répondre aux exigences du client. Nous garantissons un suivi du projet durant les
-                                    différentes étapes
-                                    pour un résultat respectant l'équilibre qualité-coût-délai.</p>
-                            </div>
+                            <p style={{textAlign:'justify',fontSize:'16px',lineHeight:'26px'}}>
+                                Nous développons des applications web et mobiles grâces aux dernières technologies. Nous
+                                assurons la maintenance de l’application et proposons des formations à nos clients
+                                adaptées à leurs besoins d’autonomie.</p>
+                        </div>
                         </Col> <Col lg={6} md={6} xs={12}>
                         <div style={styles.simpleColDiv}>
                             {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                             <hr style={{width: '150px', border: '1px solid #021016'}}/>
-                            <h1 style={{fontFamily:"'Playfair Display', serif", fontSize:'26px', display:'inline-block',     color: '#4a4a4a', textAlign:'center', margin:'13px auto 40px'}}>
-                                Gestion de projet</h1>
+                            <h1 style={{
+                                fontFamily: "'Playfair Display', serif",
+                                fontSize: '26px',
+                                display: 'inline-block',
+                                textAlign: 'center',
+                                margin: '13px auto 40px'
+                            }}>Conception graphique</h1>
 
-                            <p style={{textAlign:'justify',fontSize:'16px',lineHeight:'26px'}}>
-                                Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer ou
-                                d’un concept
-                                innovant proposé par nos clients. Nous offrons à la fois conseils, gestion et
-                                développement pour
-                                répondre aux exigences du client. Nous garantissons un suivi du projet durant les
-                                différentes étapes
-                                pour un résultat respectant l'équilibre qualité-coût-délai.</p>
+                            <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
+                                Le design de nos applications permettra au client d’exprimer ses valeurs et ses
+                                spécificités. Nous exploitons notre savoir-faire et notre expérience pour saisir et
+                                véhiculer l’identité visuelle de l’entreprise. </p>
                         </div>
                     </Col>
 
