@@ -25,15 +25,15 @@ export default class Menubar extends React.Component {
         this.handleResize = this.handleResize.bind(this);
     }
     componentDidMount () {
-        window.addEventListener('scroll', this.handleSpy.bind(this));
-        window.addEventListener('resize', this.handleResize.bind(this));
+        window.addEventListener('scroll', this.handleSpy);
+        window.addEventListener('resize', this.handleResize);
         var VideoHeight = document.getElementById('video-row').offsetHeight;
         this.setState({videoHeight: VideoHeight});
     }
 
     componentWillUnmount () {
-        window.removeEventListener('scroll', this.handleSpy.bind(this));
-        window.removeEventListener('resize', this.handleResize.bind(this));
+        window.removeEventListener('scroll', this.handleSpy);
+        window.removeEventListener('resize', this.handleResize);
     }
     componentWillUpdate(nextProps, nextState) {
     }
@@ -181,41 +181,109 @@ export default class Menubar extends React.Component {
             lTb2: {
                 width: '15px',
                 border: '1px solid #fff'
-            }
+            },
+            mobileDivWrapper: {
+                width: '100%',
+                zIndex: 101,
+                height: '80px',
+                transitionDuration: '0.3s',
+                transitionTimingFunction: 'ease-out',
+                position: 'fixed',
+                overflow: 'hidden',
+                display: 'inline-block',
+                textAlign: 'right'
+            },
+            mobilePrimary: {
+                width: '100%',
+                border: 0,
+                borderRadius: '0px',
+                padding: '0px 0px 0px 20px',
+                margin: '0px',
+                height: '70px',
+                opacity: '1',
+                transitionDuration: '0.5s',
+                transitionTimingFunction: 'ease-out',
+                background: 'rgba(0,0,0,0)'
+            },
+            mobileLittleTweak: {
+                display: 'block',
+                paddingTop: '7px',
+                float: 'right',
+                width: '40px',
+                height: '40px',
+                background: '#fff',
+                borderRadius: '50%'
+            },
+            mobileLTb: {
+                margin: '5px 5px 5px 11px',
+                lineHeight: '2px',
+                width: '15px',
+                border: '1px solid #5a5a5a'
+            },
         };
         var menuShow = this.props.menubar.is_shown == true ? styles.showOn:styles.showOff;
         var stylePrimary = this.state.isTop == true ? styles.primaryTop:styles.primaryNormal;
         var lTbn1 = this.state.overButton == true ? styles.lTb2:styles.lTb1;
         var lTbn2 = this.state.overButton == true ? styles.lTb1:styles.lTb2;
+        var NormalMenuBar = (
+            <div style={Object.assign(menuShow, styles.divWrapper)}>
+                <Navbar fluid style={Object.assign(styles.primary, stylePrimary)}>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a><img style={styles.logoBase} src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"}/></a>
+                        </Navbar.Brand>
+                    </Navbar.Header>
+                    <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: !this.state.open})}>
+                        <NavItem onMouseOver={ ()=> this.setState({overButton: true})}
+                                 onMouseOut={ ()=> this.setState({overButton: false})} eventKey={1}>
+                            <div style={styles.menuButton}>menu</div>
+                            <div style={styles.littleTweak}>
+                                <hr style={[styles.lTb, lTbn1]}/>
+                                <hr style={[styles.lTb, lTbn2]}/>
+                                <hr style={[styles.lTb, lTbn1]}/>
+                            </div>
+                        </NavItem>
+                    </Nav>
+                </Navbar>
+                <Panel collapsible expanded={this.state.open} style={styles.panelmenu}>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            ZetaGamma
+                        </Navbar.Brand>
+                    </Navbar.Header>
+                    <Nav pullRight style={styles.popNav}>
+                        <ul style={styles.mainMenu}>
+                            <li style={styles.mainItem}>Menu 1</li>
+                            <li style={styles.mainItem}>Menu 2</li>
+                            <li style={styles.mainItem}>Menu 3</li>
+                            <li style={styles.mainItem}>Menu 4</li>
+                            <li style={styles.mainItem}>Menu 5</li>
+                        </ul>
+                        <a style={styles.closeButton} onClick={ ()=> this.setState({open: !this.state.open})}>X</a>
+                    </Nav>
+                </Panel>
+            </div>
+        );
+        var MobileMenuBar = (
+            <div style={styles.mobileDivWrapper}>
+                <Navbar fluid style={styles.mobilePrimary}>
+                    <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: !this.state.open})}>
+                        <NavItem eventKey={1}>
+                            <div style={styles.mobileLittleTweak}>
+                                <hr style={styles.mobileLTb}/>
+                                <hr style={styles.mobileLTb}/>
+                                <hr style={styles.mobileLTb}/>
+                            </div>
+                        </NavItem>
+                    </Nav>
+                </Navbar>
+            </div>
+        );
+
         return (
-        <div style={Object.assign(menuShow,styles.divWrapper)}>
-            <Navbar fluid style={Object.assign(styles.primary, stylePrimary)}>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a><img style={styles.logoBase} src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"} /></a>
-                    </Navbar.Brand>
-                </Navbar.Header>
-                <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: !this.state.open})}>
-                    <NavItem onMouseOver={ ()=> this.setState({ overButton: true})} onMouseOut={ ()=> this.setState({ overButton: false})}  eventKey={1} ><div style={styles.menuButton}>menu </div><div style={styles.littleTweak}><hr style={[styles.lTb, lTbn1]} /><hr style={[styles.lTb, lTbn2]}/><hr style={[styles.lTb, lTbn1]} /></div></NavItem>
-                </Nav>
-            </Navbar>
-            <Panel collapsible expanded={this.state.open} style={styles.panelmenu}>
-                <Navbar.Header>
-                    <Navbar.Brand>
-ZetaGamma
-                    </Navbar.Brand>
-                </Navbar.Header>
-                <Nav pullRight style={styles.popNav}>
-                    <ul style={styles.mainMenu}>
-                        <li style={styles.mainItem}>Menu 1</li>
-                        <li style={styles.mainItem}>Menu 2</li>
-                        <li style={styles.mainItem}>Menu 3</li>
-                        <li style={styles.mainItem}>Menu 4</li>
-                        <li style={styles.mainItem}>Menu 5</li>
-                    </ul>
-                    <a style={styles.closeButton} onClick={ ()=> this.setState({ open: !this.state.open })}>X</a>
-                </Nav>
-            </Panel>
+            <div>
+                {this.props.browser.lessThan.large && MobileMenuBar}
+                {this.props.browser.greaterThan.medium && NormalMenuBar}
         </div>
     );
     }
@@ -224,7 +292,8 @@ ZetaGamma
 const mapStateToProps = (state) => (
 
 {
-    menubar: state.menubar
+    menubar: state.menubar,
+    browser: state.browser
 });
 
 const mapDispatchToProps = (dispatch) => ({

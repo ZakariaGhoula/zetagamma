@@ -49,7 +49,8 @@ class Home extends React.Component {
                 border: '8px solid #fff'
             },
             mainGrid: {
-                background: '#f3f3f3'
+                background: '#f3f3f3',
+                paddingBottom: '100px'
             },
             simpleColDiv: {
                 marginTop: '20px',
@@ -79,6 +80,17 @@ class Home extends React.Component {
             }
         }
 
+        var scrollDown = (
+            <div style={styles.scrollDownBtn}>
+                <Link
+                    style={{color: '#fff', cursor: 'pointer', textDecoration: 'none', fontStyle: 'italic'}}
+                    to="scroll1" smooth={true} offset={-50} duration={1000}>
+                    <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/mouse.svg"}/><br />
+                    Scroll down
+                </Link>
+            </div>
+        )
+
         return (
             <Grid style={styles.mainGrid} className="home" fluid ref="home">
                 <Row className="show-grid" id="video-row">
@@ -95,15 +107,7 @@ class Home extends React.Component {
                                }}>
                             <source src={PUBLIC_VIDEOS_PATH + "landing_zg4.mp4"} type="video/mp4"/>
                         </Video>
-
-                        <div style={styles.scrollDownBtn}>
-                            <Link
-                                style={{color: '#fff', cursor: 'pointer', textDecoration: 'none', fontStyle: 'italic'}}
-                                to="scroll1" smooth={true} offset={-50} duration={1000}>
-                                <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/mouse.svg"}/><br />
-                                Scroll down
-                            </Link>
-                        </div>
+                        {!this.props.browser.lessThan.medium && scrollDown}
                     </Col>
                 </Row>
 
@@ -126,7 +130,8 @@ class Home extends React.Component {
                             lineHeight: '30px',
                             color: '#4a4a4a',
                             display: 'block',
-                            textAlign: 'center',
+                            textAlign: 'justify',
+                            textAlignLast: 'center',
                             margin: '40px auto',
                             fontWeight: 300
                         }}>

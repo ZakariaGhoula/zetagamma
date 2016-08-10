@@ -65,10 +65,17 @@ export default class Header extends React.Component {
             </header>
 
 
-
-
-
         );
     }
 }
 
+
+const mapStateToProps = (state) => (
+
+{
+    browser: state.browser
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
