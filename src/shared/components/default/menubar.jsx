@@ -265,7 +265,8 @@ export default class Menubar extends React.Component {
                 <Navbar fluid style={Object.assign(styles.primary, stylePrimary)}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a><img style={styles.logoBase} src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"}/></a>
+                            <Link to="/expertise"><img style={styles.logoBase}
+                                                       src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"}/></Link>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
