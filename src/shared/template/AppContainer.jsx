@@ -66,7 +66,6 @@ export function requireContainer(Component) {
                     {header}
                     <Component {...this.props}/>
                     {footer}
-                    <Footer/>
 
                 </div>)
             }
