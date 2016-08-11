@@ -11,7 +11,7 @@ import Video from 'react-html5video';
 import Radium, {Style} from 'radium';
 import {Link, Element} from 'react-scroll';
 import UnderGrid from './underGrid';
-import {GlobalStyle} from './../../constants/GlobalStyle'
+import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
 
 @Radium
 class Home extends React.Component {
@@ -33,7 +33,7 @@ class Home extends React.Component {
                 color: '#fff',
                 width: '100%',
                 fontSize: '3.7vw',
-                fontFamily: "'Alegreya Sans', sans-serif",
+                fontFamily: GraphChart.font.mainFont,
                 // textTransform: "uppercase",
                 fontVariant: 'small-caps',
                 fontWeight: 400,
@@ -50,16 +50,14 @@ class Home extends React.Component {
                 border: '8px solid #fff'
             },
             mainGrid: {
-                background: '#f3f3f3',
+                background: GraphChart.color.globalBackground,
                 paddingBottom: '100px'
             },
             simpleColDiv: {
                 marginTop: '20px',
                 padding: '30px',
                 minHeight: '320px',
-                color: '#4a4a4a',
                 textAlign: 'center',
-                fontFamily: "'Alegreya Sans', sans-serif",
             },
             scrollDownBtn: {
                 position: 'relative',
@@ -94,8 +92,8 @@ class Home extends React.Component {
 
         return (
             <Grid style={styles.mainGrid} className="home" fluid ref="home">
-                <Row className="show-grid" id="video-row">
-                    <Col>
+                <Row className="show-grid">
+                    <Col id="video-row">
                         <div style={styles.baseline}>
                             <img style={styles.centerLogoStyle} src={PUBLIC_IMAGES_PATH + "logo_ZG.png"}/>
                             <br />
@@ -118,81 +116,69 @@ class Home extends React.Component {
                 <Grid className="home" ref="home">
                     <Element name="scroll1">
 
-                        <h2 style={[GlobalStyle.h2, {margin: '40px auto'}]}>
-                            ZetaGamma, cabinet digital </h2>
                         <h3 style={[GlobalStyle.h3, {marginBottom: '70px'}]}>
-                            Au moyen de notre vaste gamme de services, nous offrons des solutions digitales concrètes
-                            adaptées aux attentes de nos clients.</h3>
+                            ZetaGamma, agence digitale disposant d’une vaste gamme de services, conçoit des solutions
+                            digitales concrètes adaptées aux attentes de sa clientèle.</h3>
                     </Element>
                 </Grid>
                 <UnderGrid>
-                    <Row>
-                        <Col lg={6} md={6} xs={12}>
-                            <div style={styles.simpleColDiv}>
-                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
-                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Gestion de projet</h2>
-                                <p style={{
-                                    textAlign: 'justify',
-                                    fontSize: '18px',
-                                    textAlignLast: 'center',
-                                    lineHeight: '26px'
-                                }}>
-                                    Dans le but d'atteindre les objectifs fixés par le client, nous assurons la
-                                    coordination et la maitrise des activités durant le déroulement du projet pour un
-                                    résultat respectant l’équilibre qualité-coût-délai.</p>
-                            </div>
-                        </Col>
-                        <Col lg={6} md={6} xs={12}>
-                            <div style={styles.simpleColDiv}>
-                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
-                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Stratégie digitale et marketing</h2>
 
-                                <p style={{
-                                    textAlign: 'justify',
-                                    fontSize: '18px',
-                                    textAlignLast: 'center',
-                                    lineHeight: '26px'
-                                }}>
-                                    Nous aidons les entreprises à mieux gérer leur activité actuelle afin de la mettre à
-                                    profit. Notre objectif est d’intensifier la force du service ou du produit et
-                                    d’accroître la notoriété de l’entreprise.</p>
-                            </div>
-                        </Col>
+                    <h2 style={[GlobalStyle.h2, {margin: '70px 0px 20px 0px'}]}>Prestations proposées</h2>
+
+                    <Row>
+
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
+                                <hr style={GlobalStyle.hr}/>
                                 <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Développement et maintenance</h2>
 
-                                <p style={{
-                                    textAlign: 'justify',
-                                    fontSize: '18px',
-                                    textAlignLast: 'center',
-                                    lineHeight: '26px'
-                                }}>
+                                <p style={GlobalStyle.p}>
                                     Nous développons des applications web et mobiles grâces aux dernières technologies.
                                     Nous
                                     assurons la maintenance de l'application et proposons des formations à nos clients
                                     adaptées à leurs besoins d’autonomie.</p>
                             </div>
-                        </Col> <Col lg={6} md={6} xs={12}>
-                        <div style={styles.simpleColDiv}>
-                            {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                            <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
-                            <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Conception graphique</h2>
+                        </Col>
 
-                            <p style={{
-                                textAlign: 'justify',
-                                fontSize: '18px',
-                                textAlignLast: 'center',
-                                lineHeight: '26px'
-                            }}>
-                                Nous exerçons notre savoir-faire pour révéler les valeurs et l’identité de nos clients à
-                                travers un design unique répondant aux normes techniques et esthétiques. </p>
-                        </div>
-                    </Col>
+                        <Col lg={6} md={6} xs={12}>
+                            <div style={styles.simpleColDiv}>
+                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
+                                <hr style={GlobalStyle.hr}/>
+                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Gestion de projet</h2>
+                                <p style={GlobalStyle.p}>
+                                    Dans le but d'atteindre les objectifs fixés par le client, nous assurons la
+                                    coordination et la maitrise des activités durant le déroulement du projet pour un
+                                    résultat respectant l’équilibre qualité-coût-délai.</p>
+                            </div>
+                        </Col>
+
+                        <Col lg={6} md={6} xs={12}>
+                            <div style={styles.simpleColDiv}>
+                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
+                                <hr style={GlobalStyle.hr}/>
+                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Stratégie digitale et marketing</h2>
+
+                                <p style={GlobalStyle.p}>
+                                    Nous prenons part à la détermination, l’organisation et la structuration de
+                                    l’ensemble des choix d’objectifs et de ressources à court, moyen ou long terme en
+                                    vue d’optimiser le service proposé par notre clientèle et d’accroître sa
+                                    notoriété.</p>
+                            </div>
+                        </Col>
+
+                        <Col lg={6} md={6} xs={12}>
+                            <div style={styles.simpleColDiv}>
+                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
+                                <hr style={GlobalStyle.hr}/>
+                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Conception graphique</h2>
+
+                                <p style={GlobalStyle.p}>
+                                    Nous exerçons notre savoir-faire pour révéler les valeurs et l’identité de nos
+                                    clients à
+                                    travers un design unique répondant aux normes techniques et esthétiques. </p>
+                            </div>
+                        </Col>
 
                     </Row>
                 </UnderGrid>

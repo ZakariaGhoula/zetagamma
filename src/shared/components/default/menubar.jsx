@@ -7,6 +7,7 @@ import Radium, { Style } from 'radium'
 import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
 import color from "color";
 import * as MenubarActions    from './../../actions/MenubarActions';
+import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
 
 @Radium
 export default class Menubar extends React.Component {
@@ -32,6 +33,7 @@ export default class Menubar extends React.Component {
         this.setState({videoHeight: VideoHeight});
     }
 
+
     componentWillUnmount () {
         window.removeEventListener('scroll', this.handleSpy);
         window.removeEventListener('resize', this.handleResize);
@@ -51,6 +53,11 @@ export default class Menubar extends React.Component {
         this.setState({videoHeight: document.getElementById('video-row').offsetHeight});
     }
     handleSpy() {
+        if (this.state.videoHeight - 80 < 0) {
+            var VideoHeight = document.getElementById('video-row').offsetHeight;
+            this.setState({videoHeight: VideoHeight});
+            console.log((this.state.videoHeight - 75) + ' et ' + window.scrollY);
+        }
         if(window.scrollY < 30) {
             if(this.state.isTop == false)
                 this.setState({isTop: true});
@@ -105,7 +112,7 @@ export default class Menubar extends React.Component {
                 fontWeight: 500,
                 margin: '10px',
                 float: 'left',
-                fontFamily: "'Alegreya Sans', sans-serif",
+                fontFamily: GraphChart.font.mainFont,
             },
             divWrapper: {
                 width:'100%',
@@ -251,7 +258,7 @@ export default class Menubar extends React.Component {
                 fontSize: '28px',
                 lineHeight: '9vh',
                 fontWeight: 500,
-                fontFamily: "'Alegreya Sans', sans-serif",
+                fontFamily: GraphChart.font.mainFont,
             },
         };
         var menuShow = this.props.menubar.is_shown == true ? styles.showOn:styles.showOff;
@@ -325,7 +332,7 @@ export default class Menubar extends React.Component {
                     <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
                         <NavItem eventKey={1}>
                             <div
-                                style={Object.assign(styles.mobileLittleTweak, this.state.designMMB && {background: '#e4e4e4'})}>
+                                style={[styles.mobileLittleTweak, this.state.designMMB && {background: '#e4e4e4'}]}>
                                 <hr style={Object.assign(styles.mobileLTb, this.state.designMMB && {border: '1px solid #5a5a5a'})}/>
                                 <hr style={styles.mobileLTb}/>
                                 <hr style={styles.mobileLTb}/>

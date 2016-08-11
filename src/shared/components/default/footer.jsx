@@ -4,7 +4,9 @@ import {connect}            from 'react-redux';
 import { Link } from 'react-router';
 import Radium, {Style} from 'radium';
 import {Grid, Row, Col} from 'react-bootstrap';
-
+import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle';
+import {PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
+@Radium
 export default class Footer extends React.Component {
     constructor(props) {
         super(props);
@@ -15,10 +17,10 @@ export default class Footer extends React.Component {
             footerFirstFluidGrid: {
                 width: '100%',
                 minHeight: '150px',
-                background: '#4a4a4a',
-                color: '#e3e3e3',
+                background: GraphChart.color.dark,
+                color: GraphChart.color.onDark,
                 textAlign: 'left',
-                fontFamily: "'Alegreya Sans', sans-serif",
+                fontFamily: GraphChart.font.mainFont,
                 fontSize: '14px',
                 letterSpacing: '2px',
                 paddingTop: '30px',
@@ -28,14 +30,21 @@ export default class Footer extends React.Component {
                 width: '100%',
                 minHeight: '80px',
                 background: '#3a3a3a',
-                color: '#e3e3e3',
+                color: GraphChart.color.onDark,
                 textAlign: 'center',
-                fontFamily: "'Alegreya Sans', sans-serif",
+                fontFamily: GraphChart.font.mainFont,
                 fontSize: '14px',
                 letterSpacing: '2px',
                 paddingTop: '30px',
                 paddingBottom: '40px'
             },
+            hoverEffect: {
+                opacity: '0.5',
+                transition: '0.2s',
+                ':hover': {
+                    opacity: '0.9'
+                }
+            }
         };
         //  var m = moment();
 
@@ -52,9 +61,20 @@ export default class Footer extends React.Component {
                                 Tél : +34 911 376 934 / +33 6 29 52 16 68 <br /> contact@zetagamma.fr<br />Quand un
                                 peintre anonyme assembla ensemble des morceaux.
                             </Col>
-                            <Col lg={4} md={4} xs={12} style={{padding: '20px'}}>
-                                Tél : +34 911 376 934 / +33 6 29 52 16 68 <br /> contact@zetagamma.fr<br />livre
-                                spécimen de polices de texte ensemble des morceaux.
+                            <Col lg={4} md={4} xs={12} style={{padding: '20px', textAlign: 'right'}}>
+                                <a target="_blank"
+                                   href="https://www.facebook.com/pages/Zetagamma/1384682821765251?fref=ts"><img
+                                    key="link1" src={PUBLIC_IMAGES_PATH + "svg/social/facebook.svg"}
+                                    style={GlobalStyle.aSocial}/></a>
+                                <a target="_blank" href="https://plus.google.com/113613218291092049283/posts"><img
+                                    key="link2" src={PUBLIC_IMAGES_PATH + "svg/social/google-plus.svg"}
+                                    style={GlobalStyle.aSocial}/></a>
+                                <a target="_blank" href="https://www.linkedin.com/company/zetagamma"><img key="link3"
+                                                                                                          src={PUBLIC_IMAGES_PATH + "svg/social/linkedin.svg"}
+                                                                                                          style={GlobalStyle.aSocial}/></a>
+                                <a target="_blank" href="https://twitter.com/zeta_gamma"><img key="link4"
+                                                                                              src={PUBLIC_IMAGES_PATH + "svg/social/twitter.svg"}
+                                                                                              style={GlobalStyle.aSocial}/></a>
                             </Col>
                         </Row>
                     </Grid>
