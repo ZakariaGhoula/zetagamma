@@ -8,23 +8,26 @@ var history = ReactRouter.history;
 
 /*-------- */
 /*---- JOB */
-export function retrieveAjaxDataJob(token,id_job) {
-    return fetch(HomeConstants.APIEndpoints.DATA_HOME+"?id_job="+id_job, {
+
+//--- Requête vers l'API
+export function retrieveAjaxDataHome() {
+    return fetch(HomeConstants.APIEndpoints.DATA_HOME, {
         method: 'get',
         credentials: 'include',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Token token="' + token + '"'
+            'Content-Type': 'application/json'
         }
     })
         .then(parseJSON)
         .then(response => {
-            return (response.data);
+            return (response);
         })
 }
-export function retrieveDataJob(token,id_job) {
-    const p = retrieveAjaxDataJob(token,id_job);
+
+//--- Action que le composant appelle
+export function retrieveDataHome() {
+    const p = retrieveAjaxDataHome();
     return {
         type: [HomeConstants.ActionTypes.DATA_HOME_REQUEST, HomeConstants.ActionTypes.DATA_HOME_SUCCESS, HomeConstants.ActionTypes.DATA_HOME_FAILURE],
         promise: p

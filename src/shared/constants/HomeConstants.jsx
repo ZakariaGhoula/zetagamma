@@ -1,6 +1,5 @@
 import keyMirror from 'keymirror';
-var APIRoot = "http://api.crossyjob.com";
-var APPRoot = "http://www.crossyjob.com";
+import {APIRoot} from './DefaultConstants';
 
 
 // Todo constants
@@ -8,7 +7,7 @@ export const HomeConstants = {
 
 
     APIEndpoints: {
-        DATA_HOME:        APIRoot + "/v1/#",
+        DATA_HOME: APIRoot + "/textzones",
 
     },
 

@@ -19,7 +19,16 @@ class Home extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.actions.retrieveDataHome();
+    }
 
+    componentWillUpdate(nextProps, nextState) {
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return (false)
+    }
     render() {
         var styles = {
             video: {
@@ -193,7 +202,8 @@ class Home extends React.Component {
 const mapStateToProps = (state) => (
 
 {
-    browser: state.browser
+    browser: state.browser,
+    data_home: state.home.data_home
 });
 
 const mapDispatchToProps = (dispatch) => ({

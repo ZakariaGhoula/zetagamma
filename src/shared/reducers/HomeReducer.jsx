@@ -3,7 +3,7 @@ import { HomeConstants } from './../constants/HomeConstants';
 
 
 const initialState = {
-    data_job: null,
+    data_home: null,
     isRequesting: true,
     statusText: null
 };
@@ -18,13 +18,12 @@ function DATA_HOME_FAILURE(state, action) {
         'isRequesting': false,
         'statutText':'Erreur'
     });
-
 }
 function DATA_HOME_SUCCESS(state, action) {
 
     return Object.assign({}, state, {
         'isRequesting': false,
-        'data_job': action.result
+        'data_home': action.result
     });
 
 }

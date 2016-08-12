@@ -24,7 +24,7 @@ Object
 
     });
 const store = configureStore(initialState);
-store.dispatch(showLoading())
+// store.dispatch(showLoading())
 store.dispatch(calculateResponsiveState());
 render(
     <Provider store={store}>
@@ -37,4 +37,4 @@ render(
 
 
 // do long running stuff
-store.dispatch(hideLoading())
+// store.dispatch(hideLoading())

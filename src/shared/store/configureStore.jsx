@@ -31,9 +31,7 @@ export default function configureStore(initialState) {
             router: routerStateReducer
         })
         ;
-    const middleware = applyMiddleware(promiseMiddleware, logger, loadingBarMiddleware({
-        promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE'],
-    }));
+    const middleware = applyMiddleware(promiseMiddleware(), logger);
 
     createStoreWithMiddleware = compose(
         middleware,
