@@ -8,3 +8,4 @@ export default combineReducers({
 });*/
 export { default as Home } from './HomeReducer';
 export { default as Menubar } from './MenubarReducer';
+export {default as Localise} from './LocaliseReducer';

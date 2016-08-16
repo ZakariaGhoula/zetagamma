@@ -7,6 +7,7 @@ import Radium, { Style } from 'radium'
 import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
 import color from "color";
 import Menubar from './menubar';
+import Localise from './localise';
 
 @Radium
 export default class Header extends React.Component {
@@ -18,6 +19,7 @@ export default class Header extends React.Component {
     render() {
         return (
             <header >
+                <Localise />
                 <Menubar />
             </header>
         );

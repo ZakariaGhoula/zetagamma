@@ -73,7 +73,7 @@ export function requireContainer(Component) {
             return (
                 // {/*<IntlProvider locale={this.state.lang}>*/}
                 <div>
-                    <LoadingBar updateTime={100} maxProgress={95} progressIncrease={10}/>
+                    <LoadingBar />
                     {return_to_show}</div>
                 // </IntlProvider>
             )

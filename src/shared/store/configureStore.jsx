@@ -6,12 +6,13 @@ import createHistory from 'history/lib/createBrowserHistory';
 import {applyMiddleware, compose, createStore,combineReducers} from 'redux';
 import multireducer from 'multireducer';
 import createLogger from 'redux-logger';
-import promiseMiddleware  from '../lib/promiseMiddleware';
+import thunkMiddleware from 'redux-thunk';
+import promiseMiddleware  from 'redux-promise-middleware';
 import {responsiveStateReducer,responsiveStoreEnhancer,createResponsiveStateReducer} from 'redux-responsive';
-import { loadingBarReducer } from 'react-redux-loading-bar'
-import { loadingBarMiddleware } from 'react-redux-loading-bar'
+import {loadingBarMiddleware, loadingBarReducer} from 'react-redux-loading-bar'
 import {default as home} from '../../shared/reducers/HomeReducer';
 import {default as menubar} from '../../shared/reducers/MenubarReducer';
+import {default as localise} from '../../shared/reducers/LocaliseReducer';
 
 export default function configureStore(initialState) {
 
@@ -20,6 +21,7 @@ export default function configureStore(initialState) {
     const reducer = combineReducers({  // can be mounted as any property. Later you can use this prop to access state slices in mapStateToProps
             home,
             menubar,
+            localise,
             loadingBar: loadingBarReducer,
             browser: createResponsiveStateReducer({
                 extraSmall: 450,
@@ -31,7 +33,12 @@ export default function configureStore(initialState) {
             router: routerStateReducer
         })
         ;
-    const middleware = applyMiddleware(promiseMiddleware(), logger);
+
+    const middleware = applyMiddleware(thunkMiddleware, promiseMiddleware({
+        promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE'],
+    }), loadingBarMiddleware({
+        promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE'],
+    }), logger);
 
     createStoreWithMiddleware = compose(
         middleware,

@@ -29,7 +29,10 @@ export function retrieveAjaxDataHome() {
 export function retrieveDataHome() {
     const p = retrieveAjaxDataHome();
     return {
-        type: [HomeConstants.ActionTypes.DATA_HOME_REQUEST, HomeConstants.ActionTypes.DATA_HOME_SUCCESS, HomeConstants.ActionTypes.DATA_HOME_FAILURE],
-        promise: p
+        type: "DATA_HOME", //[HomeConstants.ActionTypes.DATA_HOME_REQUEST, HomeConstants.ActionTypes.DATA_HOME_SUCCESS, HomeConstants.ActionTypes.DATA_HOME_FAILURE],
+        payload: p,
+        meta: {
+            promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE']
+        }
     }
 }

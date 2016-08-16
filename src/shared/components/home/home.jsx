@@ -11,6 +11,7 @@ import Video from 'react-html5video';
 import Radium, {Style} from 'radium';
 import {Link, Element} from 'react-scroll';
 import UnderGrid from './underGrid';
+import LocText from '../localise/text';
 import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
 
 @Radium
@@ -20,15 +21,19 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.actions.retrieveDataHome();
+        if (typeof this.props.data_home !== 'undefined' && this.props.data_home == null) {
+            this.props.actions.retrieveDataHome();
+        }
     }
 
     componentWillUpdate(nextProps, nextState) {
+
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (false)
+        return (this.props.localise != nextProps.localise)
     }
+
     render() {
         var styles = {
             video: {
@@ -98,7 +103,10 @@ class Home extends React.Component {
                 </Link>
             </div>
         )
-
+        // var letext = "";
+        // if(typeof this.props.localise.last_result != 'undefined'){
+        // letext = this.props.localise.last_result[0].content;
+        // }
         return (
             <Grid style={styles.mainGrid} className="home" fluid ref="home">
                 <Row className="show-grid">
@@ -106,7 +114,7 @@ class Home extends React.Component {
                         <div style={styles.baseline}>
                             <img style={styles.centerLogoStyle} src={PUBLIC_IMAGES_PATH + "logo_ZG.png"}/>
                             <br />
-                            La solution digitale au profit de la<br />performance
+                            <LocText page="home" textzone="header"/>La solution digitale au profit de la<br />performance
                         </div>
                         {this.props.browser.greaterThan.medium && (<Video autoPlay muted style={styles.video}
                                                                           poster={PUBLIC_IMAGES_PATH + "Landing_debut.png"}
@@ -203,6 +211,7 @@ const mapStateToProps = (state) => (
 
 {
     browser: state.browser,
+    localise: state.localise,
     data_home: state.home.data_home
 });
 

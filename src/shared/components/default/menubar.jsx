@@ -7,6 +7,7 @@ import Radium, { Style } from 'radium'
 import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
 import color from "color";
 import * as MenubarActions    from './../../actions/MenubarActions';
+import * as LocaliseActions    from './../../actions/LocaliseActions';
 import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
 
 @Radium
@@ -25,7 +26,14 @@ export default class Menubar extends React.Component {
         this.changeDisplay = this.changeDisplay.bind(this);
         this.handleSpy = this.handleSpy.bind(this);
         this.handleResize = this.handleResize.bind(this);
+        this.switchlang = this.switchlang.bind(this);
     }
+
+    switchlang(lang) {
+        this.props.localise_actions.switchLang(lang);
+    };
+
+
     componentDidMount () {
         window.addEventListener('scroll', this.handleSpy);
         window.addEventListener('resize', this.handleResize);
@@ -79,7 +87,7 @@ export default class Menubar extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (  this.props.menubar.is_shown != nextProps.menubar.is_shown || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight || this.state.designMMB !== nextState.designMMB)
+        return (  (typeof this.props.menubar.is_shown !== 'undefined' && nextProps.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown != nextProps.menubar.is_shown) || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight || this.state.designMMB !== nextState.designMMB)
     }
 
     changeDisplay(boolean) {
@@ -119,7 +127,7 @@ export default class Menubar extends React.Component {
                 this.props.actions_menubar.changeDisplayMenubar(true);
             }
         }
-        this.state.isShown = this.props.menubar.is_shown;
+        this.state.isShown = this.props.menubar.is_shown !== 'undefined' ? this.props.menubar.is_shown : null;
         this.state.lastY = window.scrollY;
     }
 
@@ -298,7 +306,7 @@ export default class Menubar extends React.Component {
                 fontFamily: GraphChart.font.mainFont,
             },
         };
-        var menuShow = this.props.menubar.is_shown == true ? styles.showOn:styles.showOff;
+        var menuShow = typeof this.props.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown == true ? styles.showOn : styles.showOff;
         var stylePrimary = this.state.isTop == true ? styles.primaryTop:styles.primaryNormal;
         var lTbn1 = this.state.overButton == true ? styles.lTb2:styles.lTb1;
         var lTbn2 = this.state.overButton == true ? styles.lTb1:styles.lTb2;
@@ -338,6 +346,8 @@ export default class Menubar extends React.Component {
                             <li style={styles.mainItem}>Contact</li>
                         </ul>
                         <a style={styles.closeButton} onClick={ ()=> this.setState({open: false})}>X</a>
+                        <a onClick={this.switchlang.bind(this, 'en')}>EN</a>
+                        <a onClick={this.switchlang.bind(this, 'fr')}>FR</a>
                     </Nav>
                 </Panel>
             </div>
@@ -399,6 +409,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => ({
     actions_menubar: bindActionCreators(MenubarActions, dispatch),
+    localise_actions: bindActionCreators(LocaliseActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menubar);
