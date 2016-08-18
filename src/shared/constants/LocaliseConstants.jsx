@@ -22,7 +22,11 @@ export const LocaliseConstants = {
         DATA_LANG_REQUEST: null,
         DATA_LANG_SUCCESS: null,
         DATA_LANG_FAILURE: null,
-        SWITCH_LANG: null
+        SWITCH_LANG: null,
+        LOG_ADMIN: null,
+        DATA_CHANGE_REQUEST: null,
+        DATA_CHANGE_SUCCESS: null,
+        DATA_CHANGE_FAILURE: null,
 
     })
 };

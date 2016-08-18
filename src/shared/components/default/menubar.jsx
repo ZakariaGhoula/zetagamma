@@ -4,11 +4,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { Navbar, Nav, NavItem, Panel, Button } from 'react-bootstrap';
 import Radium, { Style } from 'radium'
-import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
+import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH, ROUTING} from './../../constants/DefaultConstants';
 import color from "color";
 import * as MenubarActions    from './../../actions/MenubarActions';
 import * as LocaliseActions    from './../../actions/LocaliseActions';
 import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
+import LocText from '../localise/text';
 
 @Radium
 export default class Menubar extends React.Component {
@@ -22,6 +23,7 @@ export default class Menubar extends React.Component {
             overButton: false,
             videoHeight: 0,
             designMMB: false,
+            overLang: false,
         };
         this.changeDisplay = this.changeDisplay.bind(this);
         this.handleSpy = this.handleSpy.bind(this);
@@ -37,45 +39,13 @@ export default class Menubar extends React.Component {
     componentDidMount () {
         window.addEventListener('scroll', this.handleSpy);
         window.addEventListener('resize', this.handleResize);
-        var VideoHeight = document.getElementById('video-row').offsetHeight;
+        if (typeof document.getElementById('show-row') != 'undefined' && document.getElementById('show-row') !== null) {
+            var VideoHeight = document.getElementById('show-row').offsetHeight;
+        } else {
+            var VideoHeight = 200;
+        }
         this.setState({videoHeight: VideoHeight});
-        var allowedKeys = {
-            37: 'left',
-            38: 'up',
-            39: 'right',
-            40: 'down',
-            65: 'a',
-            66: 'b'
-        };
 
-// the 'official' Konami Code sequence
-        var konamiCode = ['up', 'left', 'down', 'right', 'a', 'b'];
-
-// a variable to remember the 'position' the user has reached so far.
-        var konamiCodePosition = 0;
-
-// add keydown event listener
-        document.addEventListener('keydown', function (e) {
-            // get the value of the key code from the key map
-            var key = allowedKeys[e.keyCode];
-            // get the value of the required key from the konami code
-            var requiredKey = konamiCode[konamiCodePosition];
-
-            // compare the key with the required key
-            if (key == requiredKey) {
-
-                // move to the next key in the konami code sequence
-                konamiCodePosition++;
-
-                // if the last key is reached, activate cheats
-                if (konamiCodePosition == konamiCode.length) {
-                    console.log("Admin!");
-                    konamiCodePosition = 0;
-                    var adminpwd = prompt("Veuillez entrer le mot de passe administrateur :");
-                }
-            } else
-                konamiCodePosition = 0;
-        });
     }
 
 
@@ -87,7 +57,7 @@ export default class Menubar extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (  (typeof this.props.menubar.is_shown !== 'undefined' && nextProps.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown != nextProps.menubar.is_shown) || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight || this.state.designMMB !== nextState.designMMB)
+        return (  (typeof this.props.menubar.is_shown !== 'undefined' && nextProps.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown != nextProps.menubar.is_shown) || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight || this.state.designMMB !== nextState.designMMB || this.state.overLang !== nextState.overLang)
     }
 
     changeDisplay(boolean) {
@@ -95,11 +65,17 @@ export default class Menubar extends React.Component {
     }
 
     handleResize() {
-        this.setState({videoHeight: document.getElementById('video-row').offsetHeight});
+        if (typeof document.getElementById('show-row') != 'undefined' && document.getElementById('show-row') !== null) {
+            this.setState({videoHeight: document.getElementById('show-row').offsetHeight});
+        }
     }
     handleSpy() {
         if (this.state.videoHeight - 80 < 0) {
-            var VideoHeight = document.getElementById('video-row').offsetHeight;
+            if (typeof document.getElementById('show-row') != 'undefined' && document.getElementById('show-row') !== null) {
+                var VideoHeight = document.getElementById('show-row').offsetHeight;
+            } else {
+                var VideoHeight = 200;
+            }
             this.setState({videoHeight: VideoHeight});
             console.log((this.state.videoHeight - 75) + ' et ' + window.scrollY);
         }
@@ -166,14 +142,13 @@ export default class Menubar extends React.Component {
                 transitionDuration: '0.3s',
                 transitionTimingFunction: 'ease-out',
                 position: 'fixed',
-                overflow: 'hidden',
             },
             showOff: {
                 top: '-80px',
                 opacity: '1',
             },
             showOn: {
-               top:'0px',
+                top: '0px',
                 opacity: '1',
             },
             logoBase: {
@@ -305,53 +280,126 @@ export default class Menubar extends React.Component {
                 fontWeight: 500,
                 fontFamily: GraphChart.font.mainFont,
             },
+            langSelecter: {
+                marginTop: '8px',
+                transition: '0.3s ease-out',
+                zIndex: 999,
+                display: 'block',
+                right: '0px'
+            },
+            lSsimple: {
+                height: '26px',
+                width: '40px',
+                marginRight: '-20px',
+                opacity: '0.8',
+            },
+            lShover: {
+                width: '60px',
+                height: '26px',
+                marginRight: '-20px',
+                opacity: '1',
+            },
+            flagIcon: {
+                margin: '4px',
+                position: 'absolute',
+                left: '0px'
+            },
+            fIb1: {
+                left: '0px',
+                transition: '0.3s ease-in-out',
+                opacity: '0.3'
+            },
+            fIb1H: {
+                left: '27px',
+                opacity: '1'
+            },
+            fIb2: {
+                left: '0px',
+                transition: '0.1s ease-in',
+                opacity: '0.3'
+            },
+            fIb2H: {
+                left: '55px',
+
+                opacity: '1'
+            },
         };
         var menuShow = typeof this.props.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown == true ? styles.showOn : styles.showOff;
         var stylePrimary = this.state.isTop == true ? styles.primaryTop:styles.primaryNormal;
         var lTbn1 = this.state.overButton == true ? styles.lTb2:styles.lTb1;
         var lTbn2 = this.state.overButton == true ? styles.lTb1:styles.lTb2;
-
+        var flagArray = {};
+        if (this.props.localise.localise_lang == 'fr') {
+            flagArray = ['fr', 'en', 'es'];
+        } else if (this.props.localise.localise_lang == 'en') {
+            flagArray = ['en', 'fr', 'es'];
+        } else {
+            flagArray = ['es', 'fr', 'en'];
+        }
         if (this.props.browser.greaterThan.medium) {
-        var NormalMenuBar = (
-            <div style={Object.assign(menuShow, styles.divWrapper)}>
-                <Navbar fluid style={Object.assign(styles.primary, stylePrimary)}>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <Link to="/expertise"><img style={styles.logoBase}
-                                                       src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"}/></Link>
-                        </Navbar.Brand>
-                    </Navbar.Header>
-                    <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
-                        <NavItem onMouseOver={ ()=> this.setState({overButton: true})}
-                                 onMouseOut={ ()=> this.setState({overButton: false})} eventKey={1}>
-                            <div style={styles.menuButton}>menu</div>
-                            <div style={styles.littleTweak}>
-                                <hr style={[styles.lTb, lTbn1]}/>
-                                <hr style={[styles.lTb, lTbn2]}/>
-                                <hr style={[styles.lTb, lTbn1]}/>
-                            </div>
-                        </NavItem>
-                    </Nav>
-                </Navbar>
-                <Panel collapsible expanded={this.state.open} style={styles.panelmenu}>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            ZetaGamma
-                        </Navbar.Brand>
-                    </Navbar.Header>
-                    <Nav pullRight style={styles.popNav}>
-                        <ul style={styles.mainMenu}>
-                            <li style={styles.mainItem}>Étude de cas</li>
-                            <li style={styles.mainItem}>Expertise</li>
-                            <li style={styles.mainItem}>Contact</li>
-                        </ul>
-                        <a style={styles.closeButton} onClick={ ()=> this.setState({open: false})}>X</a>
-                        <a onClick={this.switchlang.bind(this, 'en')}>EN</a>
-                        <a onClick={this.switchlang.bind(this, 'fr')}>FR</a>
-                    </Nav>
-                </Panel>
-            </div>
-        );
+            var NormalMenuBar = (
+                <div style={Object.assign(menuShow, styles.divWrapper)}>
+                    <Navbar fluid style={Object.assign(styles.primary, stylePrimary)}>
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                <Link to="/"><img style={styles.logoBase}
+                                                  src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"}/></Link>
+                            </Navbar.Brand>
+                        </Navbar.Header>
+                        <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
+                            <NavItem onMouseOver={ ()=> this.setState({overButton: true})}
+                                     onMouseOut={ ()=> this.setState({overButton: false})} eventKey={1}>
+                                <div style={styles.menuButton}>menu</div>
+                                <div style={styles.littleTweak}>
+                                    <hr style={[styles.lTb, lTbn1]}/>
+                                    <hr style={[styles.lTb, lTbn2]}/>
+                                    <hr style={[styles.lTb, lTbn1]}/>
+                                </div>
+                            </NavItem>
+                        </Nav>
+                        <Nav pullRight>
+                            <NavItem eventKey={2} style={{cursor: 'pointer'}}
+                                     onMouseOver={ ()=> this.setState({overLang: true})}
+                                     onMouseOut={ ()=> this.setState({overLang: false})}>
+                                <div key="langSelector"
+                                     style={[styles.langSelecter, this.state.overLang && styles.lShover || styles.lSsimple]}>
+                                    <div style={{width: '60px'}}>
+                                        <img onClick={this.switchlang.bind(this, flagArray[2])}
+                                             style={[styles.flagIcon, {transition: '0.4s ease-in-out'}, this.state.overLang && styles.fIb2H || styles.fIb2]}
+                                             width="19" height="19"
+                                             src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[2] + ".png"}/>
+                                        <img onClick={this.switchlang.bind(this, flagArray[1])}
+                                             style={[styles.flagIcon, {transition: '0.3s cubic-bezier(.72,.25,.5,.3)'}, this.state.overLang && styles.fIb1H || styles.fIb1]}
+                                             width="19" height="19"
+                                             src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[1] + ".png"}/>
+                                        <img onClick={this.switchlang.bind(this, flagArray[0])} style={styles.flagIcon}
+                                             width="20" height="20"
+                                             src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[0] + ".png"}/>
+                                    </div>
+                                </div>
+                            </NavItem>
+                        </Nav>
+                    </Navbar>
+                    <Panel collapsible expanded={this.state.open} style={styles.panelmenu}>
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                ZetaGamma
+                            </Navbar.Brand>
+                        </Navbar.Header>
+                        <Nav pullRight style={styles.popNav}>
+                            <ul style={styles.mainMenu}>
+                                <li style={styles.mainItem}><LocText page="menubar" textzone="mb_item1" tagtype="link"
+                                                                     to="Expert"/></li>
+                                {/*<li style={styles.mainItem}><img width="20px" height="20px" onCLick={window.location.replace('something')}>Expertise</img></li>*/}
+                                <li style={styles.mainItem}>Contact</li>
+                            </ul>
+                            <a style={styles.closeButton} onClick={ ()=> this.setState({open: false})}>X</a>
+                            {/*<a onClick={this.switchlang.bind(this, 'en')}>EN</a>*/}
+                            {/*<a onClick={this.switchlang.bind(this, 'fr')}>FR</a>*/}
+                        </Nav>
+                    </Panel>
+                </div>
+            );
         } else if (this.props.browser.lessThan.large) {
             if (this.state.open) {
                 var MobileMenuBar = (
@@ -373,30 +421,30 @@ export default class Menubar extends React.Component {
                     </div>
                 );
             } else {
-        var MobileMenuBar = (
-            <div style={styles.mobileDivWrapper}>
-                <Navbar fluid style={styles.mobilePrimary}>
-                    <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
-                        <NavItem eventKey={1}>
-                            <div
-                                style={[styles.mobileLittleTweak, this.state.designMMB && {background: '#e4e4e4'}]}>
-                                <hr style={Object.assign(styles.mobileLTb, this.state.designMMB && {border: '1px solid #5a5a5a'})}/>
-                                <hr style={styles.mobileLTb}/>
-                                <hr style={styles.mobileLTb}/>
-                            </div>
-                        </NavItem>
-                    </Nav>
-                </Navbar>
-            </div>
-        );
+                var MobileMenuBar = (
+                    <div style={styles.mobileDivWrapper}>
+                        <Navbar fluid style={styles.mobilePrimary}>
+                            <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
+                                <NavItem eventKey={1}>
+                                    <div
+                                        style={[styles.mobileLittleTweak, this.state.designMMB && {background: '#e4e4e4'}]}>
+                                        <hr style={Object.assign(styles.mobileLTb, this.state.designMMB && {border: '1px solid #5a5a5a'})}/>
+                                        <hr style={styles.mobileLTb}/>
+                                        <hr style={styles.mobileLTb}/>
+                                    </div>
+                                </NavItem>
+                            </Nav>
+                        </Navbar>
+                    </div>
+                );
             }
         }
         return (
             <div>
                 {this.props.browser.lessThan.large && MobileMenuBar}
                 {this.props.browser.greaterThan.medium && NormalMenuBar}
-        </div>
-    );
+            </div>
+        );
     }
 }
 
@@ -404,7 +452,8 @@ const mapStateToProps = (state) => (
 
 {
     menubar: state.menubar,
-    browser: state.browser
+    browser: state.browser,
+    localise: state.localise
 });
 
 const mapDispatchToProps = (dispatch) => ({

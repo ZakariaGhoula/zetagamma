@@ -5,7 +5,6 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import routes      from '../shared/routes';
 import {calculateResponsiveState} from './../shared/actions/index'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { Provider }                     from 'react-redux';
 import {ReduxRouter} from 'redux-router';
 import { fromJS }                       from 'immutable';
@@ -24,7 +23,8 @@ Object
 
     });
 const store = configureStore(initialState);
-store.dispatch(showLoading())
+console.log(history);
+history.push("/fr");
 store.dispatch(calculateResponsiveState());
 render(
     <Provider store={store}>
@@ -35,6 +35,3 @@ render(
     document.getElementById('react-view')
 );
 
-
-// do long running stuff
-store.dispatch(hideLoading())

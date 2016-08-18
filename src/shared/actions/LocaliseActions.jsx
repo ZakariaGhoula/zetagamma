@@ -24,7 +24,7 @@ export function retrieveLocalLanguage(lang, page) {
     })
         .then(parseJSON)
         .then(response => {
-            return (response);
+            return ({data: response, page: page, lang: lang});
         })
 }
 
@@ -43,5 +43,45 @@ export function switchLang(new_lang) {
     return {
         type: LocaliseConstants.ActionTypes.SWITCH_LANG,
         new_lang: new_lang
+    }
+}
+export function logAdmin(pwd) {
+    return {
+        type: LocaliseConstants.ActionTypes.LOG_ADMIN,
+        pwd: pwd
+    }
+}
+
+
+export function sendChangeElement(lang, page, element, content) {
+    console.log(content);
+    return fetch(LocaliseConstants.APIEndpoints.DATA_LANG + '/update', {
+        method: 'post',
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "lang": lang,
+            "id_page": page,
+            "id_textzone": element,
+            "content": content
+        })
+    })
+        .then(parseJSON)
+        .then(response => {
+            return (response);
+        })
+}
+
+export function changeElement(lang, page, element, content) {
+    const p = sendChangeElement(lang, page, element, content);
+    return {
+        type: "DATA_CHANGE",
+        payload: p,
+        meta: {
+            promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE']
+        }
     }
 }

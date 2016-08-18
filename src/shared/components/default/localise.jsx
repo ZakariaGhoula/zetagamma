@@ -15,18 +15,24 @@ export default class Localise extends React.Component {
         super(props);
     }
 
+
     componentDidMount() {
         if (typeof this.props.localise.last_result !== 'undefined' && this.props.localise.last_result == null) {
             this.props.localise_actions.loadLanguage(this.props.localise.localise_lang, this.props.localise.page_displayed);
+
+            //Here must appear every components that have to be reloaded on each page:
+            this.props.localise_actions.loadLanguage(this.props.localise.localise_lang, 'footer');
+            this.props.localise_actions.loadLanguage(this.props.localise.localise_lang, 'menubar');
         }
     }
 
 
     componentWillUpdate(nextProps, nextState) {
-        console.log("May update lang !");
-
         this.props.localise_actions.loadLanguage(nextProps.localise.localise_lang, nextProps.localise.page_displayed);
 
+        //Here must appear every components that have to be reloaded on each page:
+        this.props.localise_actions.loadLanguage(nextProps.localise.localise_lang, 'footer');
+        this.props.localise_actions.loadLanguage(nextProps.localise.localise_lang, 'menubar');
     }
 
     shouldComponentUpdate(nextProps, nextState) {

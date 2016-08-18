@@ -8,7 +8,8 @@ import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultC
 import color from "color";
 import Menubar from './menubar';
 import Localise from './localise';
-
+import Admin from '../localise/admin';
+import LoadingBar from 'react-redux-loading-bar'
 @Radium
 export default class Header extends React.Component {
 
@@ -16,11 +17,16 @@ export default class Header extends React.Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps, nextStates) {
+        return ( this.props.loading !== nextProps.loading);
+    }
     render() {
         return (
             <header >
+                <LoadingBar />
                 <Localise />
                 <Menubar />
+                <Admin />
             </header>
         );
     }
@@ -31,7 +37,8 @@ export default class Header extends React.Component {
 const mapStateToProps = (state) => (
 
 {
-    browser: state.browser
+    browser: state.browser,
+    loading: state.loadingBar
 });
 
 const mapDispatchToProps = (dispatch) => ({});

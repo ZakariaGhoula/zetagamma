@@ -1,7 +1,7 @@
 import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
-import { Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 import   ReactDom               from 'react-dom';
 import {calculateResponsiveState} from './../../actions/index'
 import * as HomeActions    from './../../actions/HomeActions';
@@ -22,7 +22,8 @@ class Home extends React.Component {
 
     componentDidMount() {
         if (typeof this.props.data_home !== 'undefined' && this.props.data_home == null) {
-            this.props.actions.retrieveDataHome();
+            //     this.props.dispatch();
+            //  this.props.actions.retrieveDataHome();
         }
     }
 
@@ -99,7 +100,7 @@ class Home extends React.Component {
                     style={{color: '#fff', cursor: 'pointer', textDecoration: 'none', fontStyle: 'italic'}}
                     to="scroll1" smooth={true} offset={-50} duration={1000}>
                     <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/mouse.svg"}/><br />
-                    Scroll down
+                    <LocText page="home" textzone="scrolldown"/>
                 </Link>
             </div>
         )
@@ -110,11 +111,11 @@ class Home extends React.Component {
         return (
             <Grid style={styles.mainGrid} className="home" fluid ref="home">
                 <Row className="show-grid">
-                    <Col id="video-row">
+                    <Col id="show-row">
                         <div style={styles.baseline}>
                             <img style={styles.centerLogoStyle} src={PUBLIC_IMAGES_PATH + "logo_ZG.png"}/>
                             <br />
-                            <LocText page="home" textzone="header"/>La solution digitale au profit de la<br />performance
+                            <LocText page="home" textzone="header"/>
                         </div>
                         {this.props.browser.greaterThan.medium && (<Video autoPlay muted style={styles.video}
                                                                           poster={PUBLIC_IMAGES_PATH + "Landing_debut.png"}
@@ -133,14 +134,14 @@ class Home extends React.Component {
                 <Grid className="home" ref="home">
                     <Element name="scroll1">
 
-                        <h3 style={[GlobalStyle.h3, {marginBottom: '70px'}]}>
-                            ZetaGamma, agence digitale disposant d’une vaste gamme de services, conçoit des solutions
-                            digitales concrètes adaptées aux attentes de sa clientèle.</h3>
+                        <h3 style={[GlobalStyle.h3, {marginBottom: '70px'}]}><LocText page="home" textzone="subhead"/>
+                        </h3>
                     </Element>
                 </Grid>
                 <UnderGrid>
 
-                    <h2 style={[GlobalStyle.h2, {margin: '70px 0px 20px 0px'}]}>Prestations proposées</h2>
+                    <LocText tagtype="h2" heritstyle={[GlobalStyle.h2, {margin: '70px 0px 20px 0px'}]} page="home"
+                             textzone="presta_props"/>
 
                     <Row>
 
@@ -148,52 +149,43 @@ class Home extends React.Component {
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Développement et maintenance</h2>
-
-                                <p style={GlobalStyle.p}>
-                                    Nous développons des applications web et mobiles grâces aux dernières technologies.
-                                    Nous
-                                    assurons la maintenance de l'application et proposons des formations à nos clients
-                                    adaptées à leurs besoins d’autonomie.</p>
+                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                         textzone="presta_item1_header"/>
+                                <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
+                                         textzone="presta_item1_content"/>
                             </div>
                         </Col>
+                        <Col lg={6} md={6} xs={12}>
+                            <div style={styles.simpleColDiv}>
+                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
+                                <hr style={GlobalStyle.hr}/>
+                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                         textzone="presta_item3_header"/>
+                                <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
+                                         textzone="presta_item3_content"/>
+                            </div>
+                        </Col>
+
+                        <Clearfix />
 
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Gestion de projet</h2>
-                                <p style={GlobalStyle.p}>
-                                    Dans le but d'atteindre les objectifs fixés par le client, nous assurons la
-                                    coordination et la maitrise des activités durant le déroulement du projet pour un
-                                    résultat respectant l’équilibre qualité-coût-délai.</p>
+                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                         textzone="presta_item2_header"/>
+                                <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
+                                         textzone="presta_item2_content"/>
                             </div>
                         </Col>
-
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Stratégie digitale et marketing</h2>
-
-                                <p style={GlobalStyle.p}>
-                                    Nous prenons part à la détermination, l’organisation et la structuration de
-                                    l’ensemble des choix d’objectifs et de ressources à court, moyen ou long terme en
-                                    vue d’optimiser le service proposé par notre clientèle et d’accroître sa
-                                    notoriété.</p>
-                            </div>
-                        </Col>
-
-                        <Col lg={6} md={6} xs={12}>
-                            <div style={styles.simpleColDiv}>
-                                {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={GlobalStyle.hr}/>
-                                <h2 style={[GlobalStyle.h2, {margin: '30px auto'}]}>Conception graphique</h2>
-
-                                <p style={GlobalStyle.p}>
-                                    Nous exerçons notre savoir-faire pour révéler les valeurs et l’identité de nos
-                                    clients à
-                                    travers un design unique répondant aux normes techniques et esthétiques. </p>
+                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                         textzone="presta_item4_header"/>
+                                <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
+                                         textzone="presta_item4_content"/>
                             </div>
                         </Col>
 

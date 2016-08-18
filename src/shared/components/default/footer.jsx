@@ -6,6 +6,8 @@ import Radium, {Style} from 'radium';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle';
 import {PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
+import LocText from '../localise/text';
+
 @Radium
 export default class Footer extends React.Component {
     constructor(props) {
@@ -54,12 +56,10 @@ export default class Footer extends React.Component {
                     <Grid>
                         <Row>
                             <Col lg={4} md={4} xs={12} style={{padding: '20px'}}>
-                                Tél : +34 911 376 934 / +33 6 29 52 16 68 <br /> contact@zetagamma.fr<br />Quand un
-                                peintre anonyme assembla ensemble.
+                                <LocText page="footer" textzone="footer_textleft"/>
                             </Col>
                             <Col lg={4} md={4} xs={12} style={{padding: '20px'}}>
-                                Tél : +34 911 376 934 / +33 6 29 52 16 68 <br /> contact@zetagamma.fr<br />Quand un
-                                peintre anonyme assembla ensemble des morceaux.
+                                <LocText page="footer" textzone="footer_textmiddle"/>
                             </Col>
                             <Col lg={4} md={4} xs={12} style={{padding: '20px', textAlign: 'right'}}>
                                 <a target="_blank"
@@ -83,7 +83,7 @@ export default class Footer extends React.Component {
                     <Grid>
                         <Row>
                             <Col>
-                                © 2012 - 2016 - Tous droits réservés ZetaGamma.
+                                <LocText page="footer" textzone="footer_copyright"/>
                             </Col>
                         </Row>
                     </Grid>
@@ -98,3 +98,12 @@ export default class Footer extends React.Component {
         );
     }
 }
+const mapStateToProps = (state) => (
+
+{
+    localise: state.localise,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);
