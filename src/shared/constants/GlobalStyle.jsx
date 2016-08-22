@@ -27,7 +27,7 @@ export const GlobalStyle = {
         letterSpacing: '1px'
     },
 
-    h3: {
+    h3under: {
         fontFamily: "'Alegreya Sans', sans-serif",
         fontSize: '24px',
         lineHeight: '30px',
@@ -36,6 +36,14 @@ export const GlobalStyle = {
         textAlign: 'justify',
         textAlignLast: 'center',
         fontWeight: 300
+    },
+    h3: {
+        fontFamily: "'Playfair Display', serif",
+        fontSize: '24px',
+        display: 'block',
+        color: GraphChart.color.onLight,
+        textAlign: 'center',
+        letterSpacing: '1px'
     },
     hr: {
         width: '120px',

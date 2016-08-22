@@ -25,8 +25,9 @@ export default (
         <Route path="/en" locale="en" component={requireContainer(Home)}/>
         <Route path="/es" locale="es" component={requireContainer(Home)}/>
 
-        <Route path={ROUTING.Expert['fr']} locale="fr" component={requireContainer(Expert)}/>
-        <Route path={ROUTING.Expert['en']} locale="en" component={requireContainer(Expert)}/>
+        <Route path={ROUTING.expert['fr']} locale="fr" component={requireContainer(Expert)}/>
+        <Route path={ROUTING.expert['en']} locale="en" component={requireContainer(Expert)}/>
+        <Route path={ROUTING.expert['es']} locale="es" component={requireContainer(Expert)}/>
 
         <Route path="*" locale="fr" component={requireContainer(error404)}/>
 

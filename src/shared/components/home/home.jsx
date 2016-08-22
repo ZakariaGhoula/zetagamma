@@ -1,18 +1,20 @@
 import React                  from 'react';
-import { bindActionCreators } from 'redux';
-import { connect }            from 'react-redux';
-import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
+import {bindActionCreators} from 'redux';
+import {connect}            from 'react-redux';
+import {Grid, Row, Col, Clearfix, FormControls} from 'react-bootstrap';
 import   ReactDom               from 'react-dom';
 import {calculateResponsiveState} from './../../actions/index'
 import * as HomeActions    from './../../actions/HomeActions';
 import {PUBLIC_VIDEOS_PATH, PUBLIC_IMAGES_PATH} from './../../constants/DefaultConstants';
-import { Button } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import Video from 'react-html5video';
 import Radium, {Style} from 'radium';
 import {Link, Element} from 'react-scroll';
-import UnderGrid from './underGrid';
 import LocText from '../localise/text';
 import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
+import * as LocaliseActions    from './../../actions/LocaliseActions';
+import ContactForm from './../element/contact'
+import UnderGrid from './../element/underGrid';
 
 @Radium
 class Home extends React.Component {
@@ -24,7 +26,13 @@ class Home extends React.Component {
         if (typeof this.props.data_home !== 'undefined' && this.props.data_home == null) {
             //     this.props.dispatch();
             //  this.props.actions.retrieveDataHome();
+
         }
+    }
+
+    componentWillMount() {
+        this.props.localise_actions.switchPage('home');
+
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -32,7 +40,8 @@ class Home extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (this.props.localise != nextProps.localise)
+        return (false);
+        //      return (this.props.localise != nextProps.localise)
     }
 
     render() {
@@ -66,7 +75,6 @@ class Home extends React.Component {
             },
             mainGrid: {
                 background: GraphChart.color.globalBackground,
-                paddingBottom: '100px'
             },
             simpleColDiv: {
                 marginTop: '20px',
@@ -91,6 +99,25 @@ class Home extends React.Component {
             scrollDownIcon: {
                 width: '35px',
                 marginBottom: '20px'
+            },
+            contactInput: {
+                borderRadius: 0,
+                width: '100%',
+                margin: '10px',
+                height: '28px',
+                padding: '1px',
+                borderWidth: '0px 0px 1px 0px',
+                borderColor: '#e3e3e3',
+                outline: 'none',
+                fontFamily: GraphChart.font.mainFont,
+                fontSize: '17px',
+                letterSpacing: '1px',
+                color: GraphChart.color.dark,
+                resize: 'none',
+                transform: '1s ease-out'
+            },
+            contactOnFocus: {
+                height: '200px'
             }
         }
 
@@ -134,7 +161,8 @@ class Home extends React.Component {
                 <Grid className="home" ref="home">
                     <Element name="scroll1">
 
-                        <h3 style={[GlobalStyle.h3, {marginBottom: '70px'}]}><LocText page="home" textzone="subhead"/>
+                        <h3 style={[GlobalStyle.h3under, {marginBottom: '70px'}]}><LocText page="home"
+                                                                                           textzone="subhead"/>
                         </h3>
                     </Element>
                 </Grid>
@@ -143,26 +171,50 @@ class Home extends React.Component {
                     <LocText tagtype="h2" heritstyle={[GlobalStyle.h2, {margin: '70px 0px 20px 0px'}]} page="home"
                              textzone="presta_props"/>
 
-                    <Row>
+                    <Row style={{paddingBottom: '50px'}}>
 
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                <LocText heritstyle={[GlobalStyle.h3, {margin: '30px auto'}]} tagtype="h3" page="home"
                                          textzone="presta_item1_header"/>
                                 <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
                                          textzone="presta_item1_content"/>
+                                <div style={{textAlign: 'center', marginTop: '35px'}}>
+                                    <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
+                                        padding: '6px 16px',
+                                        border: '1px solid #757575',
+                                        display: 'inline-block',
+                                        color: 'rgb(74, 74, 74)',
+                                        textDecoration: 'none',
+                                        textAlign: 'center',
+                                        fontFamily: GraphChart.font.mainFont,
+                                        fontSize: '15px'
+                                    }} to="expert"/>
+                                </div>
                             </div>
                         </Col>
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                <LocText heritstyle={[GlobalStyle.h3, {margin: '30px auto'}]} tagtype="h3" page="home"
                                          textzone="presta_item3_header"/>
                                 <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
                                          textzone="presta_item3_content"/>
+                                <div style={{textAlign: 'center', marginTop: '35px'}}>
+                                    <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
+                                        padding: '6px 16px',
+                                        border: '1px solid #757575',
+                                        display: 'inline-block',
+                                        color: 'rgb(74, 74, 74)',
+                                        textDecoration: 'none',
+                                        textAlign: 'center',
+                                        fontFamily: GraphChart.font.mainFont,
+                                        fontSize: '15px'
+                                    }} to="expert"/>
+                                </div>
                             </div>
                         </Col>
 
@@ -172,28 +224,104 @@ class Home extends React.Component {
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                <LocText heritstyle={[GlobalStyle.h3, {margin: '30px auto'}]} tagtype="h3" page="home"
                                          textzone="presta_item2_header"/>
                                 <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
                                          textzone="presta_item2_content"/>
+                                <div style={{textAlign: 'center', marginTop: '35px'}}>
+                                    <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
+                                        padding: '6px 16px',
+                                        border: '1px solid #757575',
+                                        display: 'inline-block',
+                                        color: 'rgb(74, 74, 74)',
+                                        textDecoration: 'none',
+                                        textAlign: 'center',
+                                        fontFamily: GraphChart.font.mainFont,
+                                        fontSize: '15px'
+                                    }} to="expert"/>
+                                </div>
                             </div>
                         </Col>
                         <Col lg={6} md={6} xs={12}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={GlobalStyle.hr}/>
-                                <LocText heritstyle={[GlobalStyle.h2, {margin: '30px auto'}]} tagtype="p" page="home"
+                                <LocText heritstyle={[GlobalStyle.h3, {margin: '30px auto'}]} tagtype="h3" page="home"
                                          textzone="presta_item4_header"/>
                                 <LocText heritstyle={GlobalStyle.p} tagtype="p" page="home"
                                          textzone="presta_item4_content"/>
+                                <div style={{textAlign: 'center', marginTop: '35px'}}>
+                                    <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
+                                        padding: '6px 16px',
+                                        border: '1px solid #757575',
+                                        display: 'inline-block',
+                                        color: 'rgb(74, 74, 74)',
+                                        textDecoration: 'none',
+                                        textAlign: 'center',
+                                        fontFamily: GraphChart.font.mainFont,
+                                        fontSize: '15px'
+                                    }} to="expert"/>
+                                </div>
                             </div>
                         </Col>
-
                     </Row>
                 </UnderGrid>
+
+                <Grid className="home" ref="home_mission">
+                    <Element name="scroll2">
+                        <h3 style={[GlobalStyle.h3under, {
+                            marginBottom: '20px',
+                            marginTop: '100px',
+                            textAlign: 'center'
+                        }]}><LocText page="home" textzone="etude_cas"/></h3>
+                        <h2 style={[GlobalStyle.h2, {marginBottom: '70px'}]}><LocText page="home" textzone="projects"/>
+                        </h2>
+                    </Element>
+                </Grid>
+                <UnderGrid>
+
+                    <Row>
+                        <Col>
+                            <div>
+                                <div style={{
+                                    background: 'url(' + PUBLIC_IMAGES_PATH + '/salon-manoir.jpg)',
+                                    height: '600px',
+                                    backgroundSize: 'cover'
+                                }}>
+                                    <div style={{
+                                        height: '600px',
+                                        maxWidth: '425px',
+                                        float: 'right',
+                                        backgroundColor: 'rgba(255,255,255,0.8)',
+                                        textAlign: 'center',
+                                        padding: '30px'
+                                    }}><img src={PUBLIC_IMAGES_PATH + '/logo_pdh.png'}/> <br />
+                                        <hr style={GlobalStyle.hr}/>
+                                        <h2 style={GlobalStyle.h2}>Pierres d'Histoire</h2> <br /><br /> <LocText
+                                            heritstyle={GlobalStyle.p} tagtype="p" page="home"
+                                            textzone="projet_1_text"/>
+                                        <div style={{textAlign: 'center', marginTop: '35px'}}>
+                                            <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
+                                                padding: '6px 16px',
+                                                border: '1px solid #757575',
+                                                display: 'inline-block',
+                                                color: 'rgb(74, 74, 74)',
+                                                textDecoration: 'none',
+                                                textAlign: 'center',
+                                                fontFamily: GraphChart.font.mainFont,
+                                                fontSize: '15px'
+                                            }} to="expert"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </UnderGrid>
+
+                <ContactForm />
+
             </Grid>
-
-
         )
             ;
     }
@@ -209,6 +337,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(HomeActions, dispatch),
+    localise_actions: bindActionCreators(LocaliseActions, dispatch),
 
 
 });

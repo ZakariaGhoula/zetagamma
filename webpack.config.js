@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry:  [
-        'webpack-dev-server/client?http://192.168.1.40:8080/',
+        'webpack-dev-server/client?http://192.168.1.42:8080/',
         'webpack/hot/only-dev-server',
         './src/client/'
     ],
@@ -49,7 +49,7 @@ module.exports = {
         proxy: {
             '*': 'http://127.0.0.1:' + (process.env.PORT || 3000)
         },
-        host: '192.168.1.40'
+        host: '192.168.1.42'
     },
     node: {
         fs: "empty"

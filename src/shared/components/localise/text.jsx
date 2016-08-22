@@ -20,6 +20,7 @@ class LocText extends React.Component {
         this.state = {
             isEditing: false
         };
+
     }
 
     componentDidMount() {
@@ -50,6 +51,7 @@ class LocText extends React.Component {
             this.props.localise_actions.changeElement(this.props.localise.localise_lang, this.props.page, textzone, document.getElementById('tz-' + textzone).innerText);
         }
     };
+
 
     render() {
         var styles = {

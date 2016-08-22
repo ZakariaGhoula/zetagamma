@@ -77,7 +77,6 @@ export default class Menubar extends React.Component {
                 var VideoHeight = 200;
             }
             this.setState({videoHeight: VideoHeight});
-            console.log((this.state.videoHeight - 75) + ' et ' + window.scrollY);
         }
         if(window.scrollY < 30) {
             if(this.state.isTop == false)
@@ -165,7 +164,7 @@ export default class Menubar extends React.Component {
                 width: '100%',
                 overflow: 'hidden',
                 border: 0,
-                borderRadius: '0px'
+                borderRadius: '0px',
             },
             popNav: {
                 display: 'block',
@@ -178,11 +177,22 @@ export default class Menubar extends React.Component {
                 position: 'absolute',
                 width: '100%',
                 top: '0px',
+                left: '0px',
+                padding: '0px',
+                fontSize: '23px',
+                fontWeight: 400,
+                color: '#e4e4e4',
+                fontFamily: GraphChart.font.mainFont,
             },
             mainItem: {
                 display: 'inline-block',
                 padding: '20px',
-                top: '0px'
+                margin: '0px 10px 0px 10px',
+                fontVariant: 'small-caps',
+                fontSize: '23px',
+                letterSpacing: '2px',
+                fontWeight: 400,
+                fontFamily: GraphChart.font.mainFont,
             },
             closeButton: {
                 display: 'block',
@@ -346,8 +356,33 @@ export default class Menubar extends React.Component {
                                                   src={PUBLIC_IMAGES_PATH + "logo_ZG_normal.png"}/></Link>
                             </Navbar.Brand>
                         </Navbar.Header>
-                        <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
-                            <NavItem onMouseOver={ ()=> this.setState({overButton: true})}
+                        <Nav pullRight>
+                            <li role="presentation" eventKey={2}
+                                style={{cursor: 'pointer', paddingTop: '14px', paddingRight: '30px', zIndex: '50'}}
+                                onMouseOver={ ()=> this.setState({overLang: true})}
+                                onMouseOut={ ()=> this.setState({overLang: false})}>
+                                <div key="langSelector"
+                                     style={[styles.langSelecter, this.state.overLang && styles.lShover || styles.lSsimple]}>
+                                    <div style={{width: '60px'}}>
+                                        <Link to={ROUTING[this.props.localise.page_displayed][flagArray[2]]}><img
+                                            onClick={this.switchlang.bind(this, flagArray[2])}
+                                            style={[styles.flagIcon, {transition: '0.4s ease-in-out'}, this.state.overLang && styles.fIb2H || styles.fIb2]}
+                                            width="19" height="19"
+                                            src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[2] + ".png"}/></Link>
+                                        <Link to={ROUTING[this.props.localise.page_displayed][flagArray[1]]}><img
+                                            onClick={this.switchlang.bind(this, flagArray[1])}
+                                            style={[styles.flagIcon, {transition: '0.3s cubic-bezier(.72,.25,.5,.3)'}, this.state.overLang && styles.fIb1H || styles.fIb1]}
+                                            width="19" height="19"
+                                            src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[1] + ".png"}/></Link>
+                                        <Link to={ROUTING[this.props.localise.page_displayed][flagArray[0]]}><img
+                                            onClick={this.switchlang.bind(this, flagArray[0])} style={styles.flagIcon}
+                                            width="20" height="20"
+                                            src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[0] + ".png"}/></Link>
+                                    </div>
+                                </div>
+                            </li>
+                            <NavItem style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}
+                                     onMouseOver={ ()=> this.setState({overButton: true})}
                                      onMouseOut={ ()=> this.setState({overButton: false})} eventKey={1}>
                                 <div style={styles.menuButton}>menu</div>
                                 <div style={styles.littleTweak}>
@@ -357,45 +392,39 @@ export default class Menubar extends React.Component {
                                 </div>
                             </NavItem>
                         </Nav>
-                        <Nav pullRight>
-                            <NavItem eventKey={2} style={{cursor: 'pointer'}}
-                                     onMouseOver={ ()=> this.setState({overLang: true})}
-                                     onMouseOut={ ()=> this.setState({overLang: false})}>
-                                <div key="langSelector"
-                                     style={[styles.langSelecter, this.state.overLang && styles.lShover || styles.lSsimple]}>
-                                    <div style={{width: '60px'}}>
-                                        <img onClick={this.switchlang.bind(this, flagArray[2])}
-                                             style={[styles.flagIcon, {transition: '0.4s ease-in-out'}, this.state.overLang && styles.fIb2H || styles.fIb2]}
-                                             width="19" height="19"
-                                             src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[2] + ".png"}/>
-                                        <img onClick={this.switchlang.bind(this, flagArray[1])}
-                                             style={[styles.flagIcon, {transition: '0.3s cubic-bezier(.72,.25,.5,.3)'}, this.state.overLang && styles.fIb1H || styles.fIb1]}
-                                             width="19" height="19"
-                                             src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[1] + ".png"}/>
-                                        <img onClick={this.switchlang.bind(this, flagArray[0])} style={styles.flagIcon}
-                                             width="20" height="20"
-                                             src={PUBLIC_IMAGES_PATH + "svg/flags/" + flagArray[0] + ".png"}/>
-                                    </div>
-                                </div>
-                            </NavItem>
-                        </Nav>
                     </Navbar>
                     <Panel collapsible expanded={this.state.open} style={styles.panelmenu}>
                         <Navbar.Header>
-                            <Navbar.Brand>
+                            <Navbar.Brand style={{height: '39px'}}>
                                 ZetaGamma
                             </Navbar.Brand>
                         </Navbar.Header>
                         <Nav pullRight style={styles.popNav}>
                             <ul style={styles.mainMenu}>
-                                <li style={styles.mainItem}><LocText page="menubar" textzone="mb_item1" tagtype="link"
-                                                                     to="Expert"/></li>
-                                {/*<li style={styles.mainItem}><img width="20px" height="20px" onCLick={window.location.replace('something')}>Expertise</img></li>*/}
-                                <li style={styles.mainItem}>Contact</li>
+                                <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
+                                                                     textzone="mb_item0" tagtype="link"
+                                                                     to="home"/></li>
+                                |
+                                <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
+                                                                     textzone="mb_item1" tagtype="link"
+                                                                     to="expert"/></li>
+                                |
+                                <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
+                                                                     textzone="mb_item2" tagtype="link"
+                                                                     to="expert"/></li>
+                                |
+                                <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
+                                                                     textzone="mb_item3" tagtype="link"
+                                                                     to="expert"/></li>
+                                |
+                                <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
+                                                                     textzone="mb_item4" tagtype="link"
+                                                                     to="expert"/></li>
+
                             </ul>
-                            <a style={styles.closeButton} onClick={ ()=> this.setState({open: false})}>X</a>
-                            {/*<a onClick={this.switchlang.bind(this, 'en')}>EN</a>*/}
-                            {/*<a onClick={this.switchlang.bind(this, 'fr')}>FR</a>*/}
+                            <a style={styles.closeButton} onClick={ ()=> this.setState({open: false})}><img
+                                style={{width: '18px', marginRight: '10px', marginTop: '5px'}}
+                                src={PUBLIC_IMAGES_PATH + "svg/close_black.svg"}/></a>
                         </Nav>
                     </Panel>
                 </div>
@@ -424,7 +453,8 @@ export default class Menubar extends React.Component {
                 var MobileMenuBar = (
                     <div style={styles.mobileDivWrapper}>
                         <Navbar fluid style={styles.mobilePrimary}>
-                            <Nav pullRight style={{cursor: 'pointer'}} onClick={ ()=> this.setState({open: true})}>
+                            <Nav pullRight style={{cursor: 'pointer', width: '80px', float: 'right'}}
+                                 onClick={ ()=> this.setState({open: true})}>
                                 <NavItem eventKey={1}>
                                     <div
                                         style={[styles.mobileLittleTweak, this.state.designMMB && {background: '#e4e4e4'}]}>
@@ -441,6 +471,7 @@ export default class Menubar extends React.Component {
         }
         return (
             <div>
+
                 {this.props.browser.lessThan.large && MobileMenuBar}
                 {this.props.browser.greaterThan.medium && NormalMenuBar}
             </div>

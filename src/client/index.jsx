@@ -23,8 +23,8 @@ Object
 
     });
 const store = configureStore(initialState);
-console.log(history);
-history.push("/fr");
+
+
 store.dispatch(calculateResponsiveState());
 render(
     <Provider store={store}>

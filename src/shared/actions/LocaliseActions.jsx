@@ -2,7 +2,7 @@ import {checkHttpStatus, parseJSON} from './../utils/toto';
 import {LocaliseConstants} from './../constants/LocaliseConstants';
 import {pushState, replaceState} from 'redux-router';
 import ReactRouter from 'react-router';
-
+import fetch from 'isomorphic-fetch';
 
 var history = ReactRouter.history;
 
@@ -43,6 +43,12 @@ export function switchLang(new_lang) {
     return {
         type: LocaliseConstants.ActionTypes.SWITCH_LANG,
         new_lang: new_lang
+    }
+}
+export function switchPage(new_page) {
+    return {
+        type: LocaliseConstants.ActionTypes.SWITCH_PAGE,
+        new_page: new_page
     }
 }
 export function logAdmin(pwd) {

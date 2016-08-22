@@ -23,7 +23,7 @@ export default class Header extends React.Component {
     render() {
         return (
             <header >
-                <LoadingBar />
+                <LoadingBar style={{position: 'fixed', zIndex: '1001'}}/>
                 <Localise />
                 <Menubar />
                 <Admin />

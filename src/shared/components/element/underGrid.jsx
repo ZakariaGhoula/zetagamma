@@ -20,7 +20,7 @@ class UnderGrid extends React.Component {
     render() {
         var styles = {
             underGrid:{
-                background: '#fff'
+                background: '#fff',
             },
         }
 

@@ -54,6 +54,13 @@ function SWITCH_LANG(state, action) {
         'localise_lang': action.new_lang
     });
 }
+
+function SWITCH_PAGE(state, action) {
+    return Object.assign({}, state, {
+        'page_displayed': action.new_page
+    });
+}
+
 function LOG_ADMIN(state, action) {
     if (action.pwd == 'yolo') {
         console.log("You're admin!");
@@ -94,6 +101,7 @@ const handlers =
     [LocaliseConstants.ActionTypes.DATA_LANG_SUCCESS]: DATA_LANG_SUCCESS,
     [LocaliseConstants.ActionTypes.DATA_LANG_FAILURE]: DATA_LANG_FAILURE,
     [LocaliseConstants.ActionTypes.SWITCH_LANG]: SWITCH_LANG,
+    [LocaliseConstants.ActionTypes.SWITCH_PAGE]: SWITCH_PAGE,
     [LocaliseConstants.ActionTypes.LOG_ADMIN]: LOG_ADMIN,
     [LocaliseConstants.ActionTypes.DATA_CHANGE_REQUEST]: DATA_CHANGE_REQUEST,
     [LocaliseConstants.ActionTypes.DATA_CHANGE_SUCCESS]: DATA_CHANGE_SUCCESS,

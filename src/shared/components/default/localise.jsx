@@ -17,7 +17,7 @@ export default class Localise extends React.Component {
 
 
     componentDidMount() {
-        if (typeof this.props.localise.last_result !== 'undefined' && this.props.localise.last_result == null) {
+        if (typeof this.props.localise.last_result !== 'undefined') {
             this.props.localise_actions.loadLanguage(this.props.localise.localise_lang, this.props.localise.page_displayed);
 
             //Here must appear every components that have to be reloaded on each page:
@@ -28,6 +28,7 @@ export default class Localise extends React.Component {
 
 
     componentWillUpdate(nextProps, nextState) {
+
         this.props.localise_actions.loadLanguage(nextProps.localise.localise_lang, nextProps.localise.page_displayed);
 
         //Here must appear every components that have to be reloaded on each page:
@@ -36,7 +37,7 @@ export default class Localise extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (nextProps.localise.localise_lang != this.props.localise.localise_lang)
+        return (nextProps.localise.localise_lang != this.props.localise.localise_lang || nextProps.localise.page_displayed != this.props.localise.page_displayed)
     }
 
     render() {

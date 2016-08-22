@@ -2,6 +2,7 @@ import { checkHttpStatus, parseJSON } from './../utils/toto';
 import { HomeConstants } from './../constants/HomeConstants';
 import { pushState,replaceState } from 'redux-router';
 import ReactRouter from 'react-router';
+import fetch from 'isomorphic-fetch';
 
 
 var history = ReactRouter.history;

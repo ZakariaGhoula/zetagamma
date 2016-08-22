@@ -23,6 +23,7 @@ export const LocaliseConstants = {
         DATA_LANG_SUCCESS: null,
         DATA_LANG_FAILURE: null,
         SWITCH_LANG: null,
+        SWITCH_PAGE: null,
         LOG_ADMIN: null,
         DATA_CHANGE_REQUEST: null,
         DATA_CHANGE_SUCCESS: null,

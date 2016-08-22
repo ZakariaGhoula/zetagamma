@@ -10,7 +10,9 @@ import {Button} from 'react-bootstrap';
 import Video from 'react-html5video';
 import Radium, {Style} from 'radium';
 import {Link, Element} from 'react-scroll';
-import UnderGrid from './underGrid';
+import UnderGrid from './../element/underGrid';
+import * as LocaliseActions    from './../../actions/LocaliseActions';
+
 
 @Radium
 class Expert extends React.Component {
@@ -18,6 +20,9 @@ class Expert extends React.Component {
         super(props);
     }
 
+    componentWillMount() {
+        this.props.localise_actions.switchPage('expert');
+    }
 
     render() {
         var styles = {
@@ -217,7 +222,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(HomeActions, dispatch),
-
+    localise_actions: bindActionCreators(LocaliseActions, dispatch),
 
 });
 
