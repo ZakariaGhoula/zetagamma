@@ -23,11 +23,6 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        if (typeof this.props.data_home !== 'undefined' && this.props.data_home == null) {
-            //     this.props.dispatch();
-            //  this.props.actions.retrieveDataHome();
-
-        }
     }
 
     componentWillMount() {
@@ -60,7 +55,7 @@ class Home extends React.Component {
                 fontFamily: GraphChart.font.mainFont,
                 // textTransform: "uppercase",
                 fontVariant: 'small-caps',
-                fontWeight: 400,
+                fontWeight: 100,
                 letterSpacing: '0.6vw',
                 lineHeight: '5vw',
                 wordSpacing: '10px',
@@ -278,23 +273,24 @@ class Home extends React.Component {
                         </h2>
                     </Element>
                 </Grid>
-                <UnderGrid>
+                <Grid>
 
                     <Row>
                         <Col>
                             <div>
                                 <div style={{
-                                    background: 'url(' + PUBLIC_IMAGES_PATH + '/salon-manoir.jpg)',
+                                    background: 'url(' + PUBLIC_IMAGES_PATH + '/home/Crossy-accueil.png)',
                                     height: '600px',
-                                    backgroundSize: 'cover'
+                                    backgroundSize: 'contain',
+                                    backgroundPosition: 'right',
+                                    backgroundRepeat: 'no-repeat'
                                 }}>
                                     <div style={{
                                         height: '600px',
                                         maxWidth: '425px',
-                                        float: 'right',
-                                        backgroundColor: 'rgba(255,255,255,0.8)',
+                                        float: 'left',
                                         textAlign: 'center',
-                                        padding: '30px'
+                                        padding: '120px 30px 30px 30px'
                                     }}><img src={PUBLIC_IMAGES_PATH + '/logo_pdh.png'}/> <br />
                                         <hr style={GlobalStyle.hr}/>
                                         <h2 style={GlobalStyle.h2}>Pierres d'Histoire</h2> <br /><br /> <LocText
@@ -317,7 +313,7 @@ class Home extends React.Component {
                             </div>
                         </Col>
                     </Row>
-                </UnderGrid>
+                </Grid>
 
                 <ContactForm />
 

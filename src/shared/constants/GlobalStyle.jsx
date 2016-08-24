@@ -8,7 +8,7 @@ export const GraphChart = {
         light: '#e3e3e3',
         onLight: '#4a4a4a',
         onDark: '#e3e3e3',
-        globalBackground: '#f3f3f3'
+        globalBackground: '#f0f0f0'
     },
     font: {
         mainFont: "'Alegreya Sans', sans-serif",
@@ -52,9 +52,10 @@ export const GlobalStyle = {
 
     p: {
         textAlign: 'justify',
-        fontSize: '18px',
+        fontSize: '22px',
+        fontWeight: '100',
         textAlignLast: 'center',
-        lineHeight: '26px',
+        lineHeight: '30px',
         fontFamily: GraphChart.font.mainFont,
         color: GraphChart.color.onLight,
     },

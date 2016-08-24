@@ -48,6 +48,7 @@ class ContactForm extends React.Component {
                 padding: '1px',
                 borderWidth: '0px 0px 1px 0px',
                 borderColor: '#e3e3e3',
+                borderStyle: 'solid',
                 outline: 'none',
                 fontFamily: GraphChart.font.mainFont,
                 fontSize: '17px',

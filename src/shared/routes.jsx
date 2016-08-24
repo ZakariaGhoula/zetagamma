@@ -4,6 +4,8 @@ import App from './template/index';
 import {requireContainer} from './template/AppContainer';
 import Home from './components/home/home';
 import Expert from './components/home/expert';
+import Study from './components/home/study';
+import StudyCase from './components/home/studyCase';
 import error404 from './template/error/error404';
 import {ROUTING} from './constants/DefaultConstants';
 
@@ -29,6 +31,12 @@ export default (
         <Route path={ROUTING.expert['en']} locale="en" component={requireContainer(Expert)}/>
         <Route path={ROUTING.expert['es']} locale="es" component={requireContainer(Expert)}/>
 
+        <Route path={ROUTING.study['fr']} locale="fr" component={requireContainer(Study)}/>
+        <Route path={ROUTING.study['en']} locale="en" component={requireContainer(Study)}/>
+        <Route path={ROUTING.study['es']} locale="es" component={requireContainer(Study)}/>
+        <Route path={ROUTING.study['fr'] + "/:studyname"} locale="fr" component={requireContainer(StudyCase)}/>
+        <Route path={ROUTING.study['en'] + "/:studyname"} locale="en" component={requireContainer(StudyCase)}/>
+        <Route path={ROUTING.study['es'] + "/:studyname"} locale="es" component={requireContainer(StudyCase)}/>
         <Route path="*" locale="fr" component={requireContainer(error404)}/>
 
     </Route>

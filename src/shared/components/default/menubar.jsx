@@ -54,10 +54,11 @@ export default class Menubar extends React.Component {
         window.removeEventListener('resize', this.handleResize);
     }
     componentWillUpdate(nextProps, nextState) {
+
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (  (typeof this.props.menubar.is_shown !== 'undefined' && nextProps.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown != nextProps.menubar.is_shown) || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight || this.state.designMMB !== nextState.designMMB || this.state.overLang !== nextState.overLang)
+        return (  (typeof this.props.menubar.is_shown !== 'undefined' && nextProps.menubar.is_shown !== 'undefined' && this.props.menubar.is_shown != nextProps.menubar.is_shown) || this.state.open !== nextState.open || this.state.isTop !== nextState.isTop || this.state.overButton !== nextState.overButton || this.state.videoHeight !== nextState.videoHeight || this.state.designMMB !== nextState.designMMB || this.state.overLang !== nextState.overLang || this.props.browser.greaterThan.medium != nextProps.browser.greaterThan.medium)
     }
 
     changeDisplay(boolean) {
@@ -185,6 +186,7 @@ export default class Menubar extends React.Component {
                 fontFamily: GraphChart.font.mainFont,
             },
             mainItem: {
+                position: 'relative',
                 display: 'inline-block',
                 padding: '20px',
                 margin: '0px 10px 0px 10px',
@@ -192,6 +194,7 @@ export default class Menubar extends React.Component {
                 fontSize: '23px',
                 letterSpacing: '2px',
                 fontWeight: 400,
+                textDecoration: 'none',
                 fontFamily: GraphChart.font.mainFont,
             },
             closeButton: {
@@ -401,22 +404,23 @@ export default class Menubar extends React.Component {
                         </Navbar.Header>
                         <Nav pullRight style={styles.popNav}>
                             <ul style={styles.mainMenu}>
+
                                 <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
                                                                      textzone="mb_item0" tagtype="link"
                                                                      to="home"/></li>
-                                |
+
                                 <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
                                                                      textzone="mb_item1" tagtype="link"
-                                                                     to="expert"/></li>
-                                |
+                                                                     to="study"/></li>
+
                                 <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
                                                                      textzone="mb_item2" tagtype="link"
                                                                      to="expert"/></li>
-                                |
+
                                 <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
                                                                      textzone="mb_item3" tagtype="link"
                                                                      to="expert"/></li>
-                                |
+
                                 <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
                                                                      textzone="mb_item4" tagtype="link"
                                                                      to="expert"/></li>

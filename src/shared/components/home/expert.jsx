@@ -10,9 +10,11 @@ import {Button} from 'react-bootstrap';
 import Video from 'react-html5video';
 import Radium, {Style} from 'radium';
 import {Link, Element} from 'react-scroll';
-import UnderGrid from './../element/underGrid';
+import LocText from '../localise/text';
+import {GlobalStyle, GraphChart} from './../../constants/GlobalStyle'
 import * as LocaliseActions    from './../../actions/LocaliseActions';
-
+import ContactForm from './../element/contact'
+import UnderGrid from './../element/underGrid';
 
 @Radium
 class Expert extends React.Component {
@@ -26,17 +28,26 @@ class Expert extends React.Component {
 
     render() {
         var styles = {
-            video: {
+            pictureDiv: {
+                width: '100%',
+                opacity: '0.7',
+                maxHeight: '600px',
+                height: '600px',
+            },
+            pictureDivContainer: {
                 width: '100%',
                 opacity: '1',
-                display: 'block'
+                maxHeight: '600px',
+                height: '600px',
+                background: '#000',
+                display: 'block',
             },
             baseline: {
-                marginTop: '10%',
+                marginTop: '320px',
                 position: 'absolute',
                 color: '#fff',
                 width: '100%',
-                fontSize: '3.7vw',
+                fontSize: '60px',
                 fontFamily: "'Alegreya Sans', sans-serif",
                 // textTransform: "uppercase",
                 fontVariant: 'small-caps',
@@ -54,13 +65,11 @@ class Expert extends React.Component {
                 border: '8px solid #fff'
             },
             mainGrid: {
-                background: '#f3f3f3',
+                background: GraphChart.color.globalBackground,
                 paddingBottom: '100px'
             },
             simpleColDiv: {
-                marginTop: '20px',
-                padding: '30px',
-                minHeight: '360px',
+                padding: '0px 30px 0px 30px',
                 color: '#4a4a4a',
                 textAlign: 'center',
                 fontFamily: "'Alegreya Sans', sans-serif",
@@ -85,53 +94,57 @@ class Expert extends React.Component {
             }
         }
 
-        var scrollDown = (
-            <div style={styles.scrollDownBtn}>
-                <Link
-                    style={{color: '#fff', cursor: 'pointer', textDecoration: 'none', fontStyle: 'italic'}}
-                    to="scroll1" smooth={true} offset={-50} duration={1000}>
-                    <img style={styles.scrollDownIcon} src={PUBLIC_IMAGES_PATH + "svg/mouse.svg"}/><br />
-                    Scroll down
-                </Link>
-            </div>
-        )
 
         return (
-            <Grid style={styles.mainGrid} className="home" fluid ref="home">
-
-                <Grid className="home" ref="home">
-                    <Element name="scroll1">
-
-                        <h2 style={{
-                            fontFamily: "'Playfair Display', serif",
-                            fontSize: '28px',
-                            display: 'block',
-                            color: '#4a4a4a',
-                            textAlign: 'center',
-                            margin: '40px auto',
-                            letterSpacing: '1px'
-                        }}>
-                            Zetagamma est une agence digitale </h2>
-                        <h3 style={{
-                            fontFamily: "'Alegreya Sans', sans-serif",
-                            fontSize: '24px',
-                            lineHeight: '30px',
-                            color: '#4a4a4a',
-                            display: 'block',
-                            textAlign: 'justify',
-                            textAlignLast: 'center',
-                            margin: '40px auto',
-                            fontWeight: 300
-                        }}>
-                            Nous proposons des réponses concrètes pour répondre aux besoins de nos clients.
-                            Grâce à un large éventail de services, nous accompagnons le client tout au long de
-                            l’élaboration
-                            de sa solution digitale.</h3>
-                    </Element>
-                </Grid>
-                <UnderGrid>
+            <Grid style={styles.mainGrid} className="expert" fluid ref="expert">
+                <Row className="show-grid">
+                    <Col id="show-row">
+                        <div style={styles.baseline}>
+                            <LocText page="expert" textzone="header"/>
+                        </div>
+                        <div style={styles.pictureDivContainer}>
+                            <div style={[styles.pictureDiv, {
+                                backgroundImage: "url('" + PUBLIC_IMAGES_PATH + "expert/library.jpg')",
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center'
+                            }]}></div>
+                        </div>
+                    </Col>
+                </Row>
+                <Grid>
                     <Row>
-                        <Col lg={6} md={6} xs={12}>
+                        <Col style={{
+                            background: '#fff',
+                            marginTop: '-90px',
+                            minHeight: '120px',
+                            padding: '30px 15px 30px 15px'
+                        }} lgOffset={2}
+                             mdOffset={2} lg={8} md={8} xsOffset={1} xs={10}>
+                            <h3 style={{
+                                fontFamily: "'Alegreya Sans', sans-serif",
+                                fontSize: '24px',
+                                lineHeight: '30px',
+                                color: '#4a4a4a',
+                                display: 'block',
+                                textAlign: 'justify',
+                                textAlignLast: 'center',
+                                margin: '15px auto',
+                                fontWeight: 300
+                            }}>
+                                <LocText page="expert" textzone="quotation"/></h3>
+                        </Col>
+                    </Row>
+                </Grid>
+                <Grid fluid style={{margin: '20px 0px 0px 0px', padding: '50px 0px 50px 0px'}}>
+                    <Row>
+                        <Col lgOffset={2} mdOffset={2} lg={4} md={4} xs={12} style={{
+                            backgroundImage: "url('" + PUBLIC_IMAGES_PATH + "expert/img1.jpg')",
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            height: '400px'
+                        }}>
+                        </Col>
+                        <Col lg={4} md={4} xs={12} style={{height: '400px'}}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
@@ -142,14 +155,25 @@ class Expert extends React.Component {
                                     textAlign: 'center',
                                     margin: '13px auto 40px'
                                 }}>Gestion de projet</h1>
-                                <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
+                                <p style={GlobalStyle.p}>
                                     Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
                                     ou d’un concept innovant proposé par nos clients. Nous garantissons un suivi du
                                     projet durant les différentes étapes pour un résultat respectant l’équilibre
                                     qualité-coût- délai.</p>
                             </div>
                         </Col>
-                        <Col lg={6} md={6} xs={12}>
+                    </Row>
+                </Grid>
+                <Grid fluid style={{padding: '50px 0px 80px 0px', background: '#fff'}}>
+                    <Row>
+                        <Col lg={4} md={4} xs={12} mdPush={6} style={{
+                            backgroundImage: "url('" + PUBLIC_IMAGES_PATH + "expert/img4.jpg')",
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            height: '400px'
+                        }}>
+                        </Col>
+                        <Col lgOffset={2} mdOffset={2} lg={4} md={4} xs={12} mdPull={4} style={{height: '400px'}}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
                                 <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
@@ -159,53 +183,81 @@ class Expert extends React.Component {
                                     display: 'inline-block',
                                     textAlign: 'center',
                                     margin: '13px auto 40px'
-                                }}>Stratégie digitale et marketing</h1>
-
-                                <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
-                                    Nous aidons les entreprises à mieux gérer leur activité actuelle afin de la mettre à
-                                    profit. Notre objectif est d’intensifier la force du service ou du produit et
-                                    d’accroître la notoriété de l’entreprise.</p>
+                                }}>Gestion de projet</h1>
+                                <p style={GlobalStyle.p}>
+                                    Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
+                                    ou d’un concept innovant proposé par nos clients. Nous garantissons un suivi du
+                                    projet durant les différentes étapes pour un résultat respectant l’équilibre
+                                    qualité-coût- délai.</p>
                             </div>
                         </Col>
-                        <Col lg={6} md={6} xs={12}>
+
+                    </Row>
+                </Grid>
+                <Grid fluid style={{padding: '50px 0px 50px 0px'}}>
+                    <Row>
+                        <Col lgOffset={2} mdOffset={2} lg={4} md={4} xs={12} style={{
+                            backgroundImage: "url('" + PUBLIC_IMAGES_PATH + "expert/img9.jpg')",
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            height: '400px'
+                        }}>
+                        </Col>
+                        <Col lg={4} md={4} xs={12} style={{height: '400px'}}>
                             <div style={styles.simpleColDiv}>
                                 {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                                <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
+                                <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
                                 <h1 style={{
                                     fontFamily: "'Playfair Display', serif",
                                     fontSize: '26px',
                                     display: 'inline-block',
                                     textAlign: 'center',
                                     margin: '13px auto 40px'
-                                }}>Développement et maintenance</h1>
-
-                                <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
-                                    Nous développons des applications web et mobiles grâces aux dernières technologies.
-                                    Nous
-                                    assurons la maintenance de l’application et proposons des formations à nos clients
-                                    adaptées à leurs besoins d’autonomie.</p>
+                                }}>Gestion de projet</h1>
+                                <p style={GlobalStyle.p}>
+                                    Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
+                                    ou d’un concept innovant proposé par nos clients. Nous garantissons un suivi du
+                                    projet durant les différentes étapes pour un résultat respectant l’équilibre
+                                    qualité-coût- délai.</p>
                             </div>
-                        </Col> <Col lg={6} md={6} xs={12}>
-                        <div style={styles.simpleColDiv}>
-                            {/*<div style={{backgroundImage: 'url(' + PUBLIC_IMAGES_PATH + '/svg/task.svg)', width:'80px', height:'80px', margin:'auto'}} ></div>*/}
-                            <hr style={{width: '150px', border: '1px solid #4a4a4a'}}/>
-                            <h1 style={{
-                                fontFamily: "'Playfair Display', serif",
-                                fontSize: '26px',
-                                display: 'inline-block',
-                                textAlign: 'center',
-                                margin: '13px auto 40px'
-                            }}>Conception graphique</h1>
-
-                            <p style={{textAlign: 'justify', fontSize: '16px', lineHeight: '26px'}}>
-                                Le design de nos applications permettra au client d’exprimer ses valeurs et ses
-                                spécificités. Nous exploitons notre savoir-faire et notre expérience pour saisir et
-                                véhiculer l’identité visuelle de l’entreprise. </p>
-                        </div>
+                        </Col>
+                    </Row>
+                </Grid>
+                <Grid fluid style={{padding: '50px 0px 80px 0px', background: '#fff'}}>
+                    <Row><Col>
+                        <h2 style={{
+                            fontFamily: "'Playfair Display', serif",
+                            fontSize: '26px',
+                            display: 'inline-block',
+                            textAlign: 'center',
+                            width: '100%',
+                            margin: '13px auto 20px'
+                        }}>Gestion de projet</h2>
+                        <hr style={{width: '120px', border: '1px solid #4a4a4a'}}/>
+                        <br />
+                        <br />
                     </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4} md={4} xs={12} mdPush={6} style={{
+                            backgroundImage: "url('" + PUBLIC_IMAGES_PATH + "expert/img11.jpg')",
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            height: '400px'
+                        }}>
+                        </Col>
+                        <Col lgOffset={2} mdOffset={2} lg={4} md={4} xs={12} mdPull={4} style={{height: '400px'}}>
+                            <div style={styles.simpleColDiv}>
+                                <p style={GlobalStyle.p}>
+                                    Nous assurons la réalisation d’un projet informatique, issu d’une idée à développer
+                                    ou d’un concept innovant proposé par nos clients. Nous garantissons un suivi du
+                                    projet durant les différentes étapes pour un résultat respectant l’équilibre
+                                    qualité-coût- délai.</p>
+                            </div>
+                        </Col>
 
                     </Row>
-                </UnderGrid>
+                </Grid>
             </Grid>
 
 
