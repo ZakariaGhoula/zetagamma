@@ -217,9 +217,9 @@ class StudyCase extends React.Component {
                         </div>
                     </Col>
                     <Col lg={6} md={6} xsOffset={0} xs={12}
-                         style={{marginBottom: '30px', padding: '0px 7px 0px 7px', maxWidth: '1000px'}}>
-                        <div style={{marginTop: '15px', padding: '30px', textAlign: 'center', minHeight: '500px'}}>
-                            <div style={{maxWidth: '480px', margin: 'auto'}}>
+                         style={{marginBottom: '30px', padding: '0px 7px 0px 7px'}}>
+                        <div style={{marginTop: '100px', padding: '30px', textAlign: 'center', minHeight: '500px'}}>
+                            <div style={{maxWidth: '600px', margin: 'auto'}}>
                                 <h2 style={[GlobalStyle.h3under, {fontSize: '30px'}]}>
                                     Adapté pour mobile et tablette
                                 </h2>
@@ -251,7 +251,7 @@ class StudyCase extends React.Component {
                     <Col xsHidden={true} lg={2} md={2} style={{marginBottom: '30px', padding: '0px 7px 0px 7px'}}>
                         <div style={{marginTop: '15px', padding: '30px', textAlign: 'center', minHeight: '500px'}}>
                             <div style={{maxWidth: '480px', margin: 'auto'}}>
-                                <img style={{maxWidth: '189px', maxHeight: '390px'}}
+                                <img style={{maxWidth: '238px', maxHeight: '646px'}}
                                      src={PUBLIC_IMAGES_PATH + "study/case/" + this.props.params.studyname + "/iPhone-6-Plus.png"}/>
                             </div>
                         </div>

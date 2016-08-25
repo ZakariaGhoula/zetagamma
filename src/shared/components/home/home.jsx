@@ -161,10 +161,11 @@ class Home extends React.Component {
                         </h3>
                     </Element>
                 </Grid>
+                <LocText tagtype="h2" heritstyle={[GlobalStyle.h2, {margin: '70px 0px 80px 0px'}]} page="home"
+                         textzone="presta_props"/>
                 <UnderGrid>
 
-                    <LocText tagtype="h2" heritstyle={[GlobalStyle.h2, {margin: '70px 0px 20px 0px'}]} page="home"
-                             textzone="presta_props"/>
+
 
                     <Row style={{paddingBottom: '50px'}}>
 
@@ -276,39 +277,40 @@ class Home extends React.Component {
                 <Grid>
 
                     <Row>
-                        <Col>
+                        <Col lg={6} md={6} xs={12}>
+                            <div style={{
+                                height: '600px',
+                                textAlign: 'center',
+                                padding: '120px 30px 30px 30px'
+                            }}><img src={PUBLIC_IMAGES_PATH + '/logo_pdh.png'}/> <br />
+                                <hr style={GlobalStyle.hr}/>
+                                <h2 style={GlobalStyle.h2}>Pierres d'Histoire</h2> <br /><br /> <LocText
+                                    heritstyle={GlobalStyle.p} tagtype="p" page="home"
+                                    textzone="projet_1_text"/>
+                                <div style={{textAlign: 'center', marginTop: '35px'}}>
+                                    <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
+                                        padding: '6px 16px',
+                                        border: '1px solid #757575',
+                                        display: 'inline-block',
+                                        color: 'rgb(74, 74, 74)',
+                                        textDecoration: 'none',
+                                        textAlign: 'center',
+                                        fontFamily: GraphChart.font.mainFont,
+                                        fontSize: '15px'
+                                    }} to="expert"/>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col lg={6} md={6} xs={12}>
                             <div>
                                 <div style={{
-                                    background: 'url(' + PUBLIC_IMAGES_PATH + '/home/Crossy-accueil.png)',
+                                    background: 'url(' + PUBLIC_IMAGES_PATH + '/home/Ecran-accueil.png)',
                                     height: '600px',
                                     backgroundSize: 'contain',
                                     backgroundPosition: 'right',
                                     backgroundRepeat: 'no-repeat'
                                 }}>
-                                    <div style={{
-                                        height: '600px',
-                                        maxWidth: '425px',
-                                        float: 'left',
-                                        textAlign: 'center',
-                                        padding: '120px 30px 30px 30px'
-                                    }}><img src={PUBLIC_IMAGES_PATH + '/logo_pdh.png'}/> <br />
-                                        <hr style={GlobalStyle.hr}/>
-                                        <h2 style={GlobalStyle.h2}>Pierres d'Histoire</h2> <br /><br /> <LocText
-                                            heritstyle={GlobalStyle.p} tagtype="p" page="home"
-                                            textzone="projet_1_text"/>
-                                        <div style={{textAlign: 'center', marginTop: '35px'}}>
-                                            <LocText page="home" textzone="button_3" tagtype="link" heritstyle={{
-                                                padding: '6px 16px',
-                                                border: '1px solid #757575',
-                                                display: 'inline-block',
-                                                color: 'rgb(74, 74, 74)',
-                                                textDecoration: 'none',
-                                                textAlign: 'center',
-                                                fontFamily: GraphChart.font.mainFont,
-                                                fontSize: '15px'
-                                            }} to="expert"/>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </Col>
@@ -334,8 +336,6 @@ const mapStateToProps = (state) => (
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(HomeActions, dispatch),
     localise_actions: bindActionCreators(LocaliseActions, dispatch),
-
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

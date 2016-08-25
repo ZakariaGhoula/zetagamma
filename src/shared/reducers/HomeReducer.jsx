@@ -32,6 +32,5 @@ const handlers =
     [HomeConstants.ActionTypes.DATA_HOME_REQUEST]: DATA_HOME_REQUEST,
     [HomeConstants.ActionTypes.DATA_HOME_FAILURE]: DATA_HOME_FAILURE,
     [HomeConstants.ActionTypes.DATA_HOME_SUCCESS]: DATA_HOME_SUCCESS
-
 }
 export default createReducer(initialState, handlers);

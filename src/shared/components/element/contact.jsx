@@ -20,7 +20,9 @@ class ContactForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFocused: false
+            isFocused: false,
+            mailError: false,
+            mailSent: false,
         };
     }
 
@@ -35,7 +37,7 @@ class ContactForm extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (this.state.isFocused != nextState.isFocused);
+        return (this.state.isFocused != nextState.isFocused || this.state.mailError != nextState.mailError || this.state.mailSent != nextState.mailSent);
     }
 
     render() {
@@ -65,36 +67,69 @@ class ContactForm extends React.Component {
                 padding: '6px 16px',
             }
         }
+        var maxHeightRow1 = '650px';
+        var opacityRow1 = '1';
+        var maxHeightRow2 = '0px';
+        var opacityRow2 = '0';
+        if (this.state.mailSent == true) {
+            maxHeightRow1 = '0px';
+            opacityRow1 = '0';
+            maxHeightRow2 = '650px';
+            opacityRow2 = '1';
+        }
 
 
         return (
             <div>
                 <Grid className="home" ref="contact_form">
                     <Element name="scroll3">
-                        <h3 style={[GlobalStyle.h3under, {
-                            marginBottom: '20px',
-                            marginTop: '100px',
-                            textAlign: 'center'
-                        }]}><LocText page="home" textzone="contact_us"/></h3>
-                        <h2 style={[GlobalStyle.h2, {marginBottom: '70px'}]}><LocText page="home"
+
+                        <h2 style={[GlobalStyle.h2, {marginBottom: '70px', marginTop: '150px'}]}><LocText page="footer"
                                                                                       textzone="contact_us_2"/>
                         </h2>
                     </Element>
                 </Grid>
-                <UnderGrid>
-
-                    <Row style={{outline: 'none'}} onFocus={() => this.setState({isFocused: true})}
+                <Grid style={{background: '#fff'}}>
+                    <Row style={{
+                        outline: 'none',
+                        transition: '1s ease-out',
+                        overflow: 'hidden',
+                        maxHeight: maxHeightRow1,
+                        opacity: opacityRow1
+                    }} onFocus={() => this.setState({isFocused: true})}
                          onBlur={() => this.setState({isFocused: false})} tabIndex="-1">
-                        <form >
+                        <form onSubmit={(e) => {
+
+                            var name_ctc = document.getElementById('name_contact').value;
+                            var mail_ctc = document.getElementById('mail_contact').value;
+                            var denomination_ctc = document.getElementById('denomination_contact').value;
+                            var subject_ctc = document.getElementById('subject_contact').value;
+                            var message_ctc = document.getElementById('message_contact').value;
+                            if (name_ctc.length > 3 &&
+                                mail_ctc.length > 3 &&
+                                subject_ctc.length > 5 &&
+                                message_ctc.length > 10
+                            ) {
+                                this.setState({mailError: false});
+                                this.setState({mailSent: true});
+                                this.props.actions.contactMail(name_ctc, mail_ctc, denomination_ctc, subject_ctc, message_ctc);
+                            } else {
+                                this.setState({mailError: true});
+                            }
+                            e.preventDefault();
+                        }}>
                             <Col lg={6} md={6} xs={12} style={{padding: '30px'}}>
-                                <input type="text" placeholder="Nom" style={styles.contactInput}/>
-                                <input type="text" placeholder="E-mail" style={styles.contactInput}/>
-                                <input type="text" placeholder="Dénomination" style={styles.contactInput}/>
+                                <input id="name_contact" type="text" placeholder="Nom *" style={styles.contactInput}/>
+                                <input id="mail_contact" type="text" placeholder="E-mail *"
+                                       style={styles.contactInput}/>
+                                <input id="denomination_contact" type="text" placeholder="Dénomination"
+                                       style={styles.contactInput}/>
                             </Col>
                             <Col lg={6} md={6} xs={12} style={{padding: '30px'}}>
 
-                                <input type="text" placeholder="Sujet" style={styles.contactInput}/>
-                                <textarea rows="10" cols="40" placeholder="Message"
+                                <input id="subject_contact" type="text" placeholder="Sujet *"
+                                       style={styles.contactInput}/>
+                                <textarea id="message_contact" rows="10" cols="40" placeholder="Message *"
                                           style={[styles.contactInput, this.state.isFocused && styles.contactOnFocus]}/>
                                 <button style={[{
                                     padding: '0px',
@@ -112,11 +147,30 @@ class ContactForm extends React.Component {
                                     opacity: '0'
                                 }, this.state.isFocused && styles.contactBtnOnFocus]}>Envoyer
                                 </button>
+                                { this.state.mailError == true && (<LocText page="footer" heritstyle={{
+                                    fontFamily: GraphChart.font.mainFont,
+                                    color: GraphChart.color.dark
+                                }} textzone="please_fullfil"/>) }
                             </Col>
                         </form>
                     </Row>
-                </UnderGrid>
-                <Grid fluid style={{height: '100px', backgroundColor: GraphChart.color.dark, margin: '-15px'}}>
+
+                    <Row style={{
+                        outline: 'none',
+                        transition: '2s ease-in-out',
+                        overflow: 'hidden',
+                        maxHeight: maxHeightRow2,
+                        opacity: opacityRow2
+                    }}>
+                        <div style={{textAlign: 'center', paddingTop: '60px', paddingBottom: '20px'}}><img
+                            src={PUBLIC_IMAGES_PATH + "mail.png"}/><br /><br /> <LocText page="footer"
+                                                                                         heritstyle={GlobalStyle.p}
+                                                                                         textzone="contact_mailSentMessage"/>
+                        </div>
+                    </Row>
+
+                </Grid>
+                <Grid fluid style={{height: '100px', backgroundColor: GraphChart.color.dark, margin: '-16px'}}>
                     <UnderGrid>
                         <br /><br />
                     </UnderGrid>

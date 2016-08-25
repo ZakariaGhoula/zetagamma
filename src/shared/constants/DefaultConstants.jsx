@@ -20,8 +20,8 @@ export const ROUTING = {
         "es": "/en/estudio-de-caso"
     },
     "studyCase": {
-        "fr": "/fr/etude-de-cas/*",
-        "en": "/en/case-study/*",
-        "es": "/en/estudio-de-caso/*"
+        "fr": "/fr/etude-de-cas/do-it-in-paris",
+        "en": "/en/case-study/do-it-in-paris",
+        "es": "/en/estudio-de-caso/do-it-in-paris"
     }
 };

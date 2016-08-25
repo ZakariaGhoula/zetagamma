@@ -421,10 +421,6 @@ export default class Menubar extends React.Component {
                                                                      textzone="mb_item3" tagtype="link"
                                                                      to="expert"/></li>
 
-                                <li style={styles.mainItem}><LocText page="menubar" heritstyle={{color: '#4a4a4a'}}
-                                                                     textzone="mb_item4" tagtype="link"
-                                                                     to="expert"/></li>
-
                             </ul>
                             <a style={styles.closeButton} onClick={ ()=> this.setState({open: false})}><img
                                 style={{width: '18px', marginRight: '10px', marginTop: '5px'}}
