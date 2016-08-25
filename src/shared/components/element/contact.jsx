@@ -170,7 +170,7 @@ class ContactForm extends React.Component {
                     </Row>
 
                 </Grid>
-                <Grid fluid style={{height: '100px', backgroundColor: GraphChart.color.dark, margin: '-16px'}}>
+                <Grid fluid style={{height: '100px', backgroundColor: GraphChart.color.dark, margin: '-16px -15px -16px -15px'}}>
                     <UnderGrid>
                         <br /><br />
                     </UnderGrid>
